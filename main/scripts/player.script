@@ -5,6 +5,8 @@ local DOWN = hash("down")
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
+	msg.post("@render:", "use_camera_projection")
+	msg.post("camera#camera", "acquire_camera_focus")
 
 	self.moving = false
 
