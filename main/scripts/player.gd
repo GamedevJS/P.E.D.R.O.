@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 100.0
+var SPEED = 100.0
 var DIR : Vector2 = Vector2.ZERO
 
 const MOVING = "parameters/conditions/MOVING"
@@ -13,16 +13,14 @@ const IDLE_BLEND_POS = "parameters/idle/blend_position"
 const ATTACKING_BLEND_POS = "parameters/attack1/blend_position"
 const DEAD_BLEND_POS = "parameters/dead/blend_position"
 
-
-@onready var animation := $sprites as AnimatedSprite2D
 @onready var animation_tree := $AnimationTree as AnimationTree
 
 func _ready():
 	animation_tree.active = true
 	animation_tree[DEAD] = false
+	
 
 func _physics_process(delta):
-	
 	DIR = Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
