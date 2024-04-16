@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://seubp2j2y74h"]
+[gd_scene load_steps=10 format=3 uid="uid://seubp2j2y74h"]
 
 [ext_resource type="Script" path="res://main/enemy.gd" id="1_4s5c5"]
 [ext_resource type="Texture2D" uid="uid://b7g7kb84srqk7" path="res://assets/Torch_Red.png" id="1_ohakn"]
@@ -171,7 +171,10 @@ _data = {
 radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n2a7x"]
-radius = 271.665
+radius = 151.053
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_55nue"]
+radius = 42.4264
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 4
@@ -188,11 +191,9 @@ libraries = {
 autoplay = "idle"
 
 [node name="Feet" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 10)
 shape = SubResource("CircleShape2D_mj2sc")
-
-[node name="RayCast" type="RayCast2D" parent="."]
-target_position = Vector2(0, 100)
 
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -201,5 +202,15 @@ collision_layer = 0
 shape = SubResource("CircleShape2D_n2a7x")
 debug_color = Color(0.356863, 0.611765, 0.25098, 0.419608)
 
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-1, -6)
+shape = SubResource("CircleShape2D_55nue")
+debug_color = Color(0.937255, 0.196078, 0.388235, 0.419608)
+
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]

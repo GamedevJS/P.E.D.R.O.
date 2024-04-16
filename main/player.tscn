@@ -12,9 +12,6 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_203jh"]
 radius = 11.0454
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vakw3"]
-size = Vector2(36, 40)
-
 [sub_resource type="Animation" id="Animation_5jbpr"]
 length = 0.001
 tracks/0/type = "value"
@@ -391,19 +388,19 @@ _data = {
 "running": SubResource("Animation_6slty")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_e2vhr"]
+radius = 39.0
+
 [node name="player" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
+collision_mask = 14
 script = ExtResource("1_qm2sx")
 
 [node name="Feet" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 22)
 shape = SubResource("CircleShape2D_203jh")
-
-[node name="Body" type="CollisionShape2D" parent="."]
-position = Vector2(1, 4)
-shape = SubResource("RectangleShape2D_vakw3")
-debug_color = Color(0.862745, 0, 0.301961, 0.419608)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
@@ -430,4 +427,18 @@ texture = ExtResource("1_m38ol")
 hframes = 6
 vframes = 8
 
+[node name="Hitbox" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="Body" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(1, 4)
+shape = SubResource("CircleShape2D_e2vhr")
+debug_color = Color(0.862745, 0, 0.301961, 0.419608)
+
+[node name="HitCooldown" type="Timer" parent="."]
+wait_time = 0.5
+
 [connection signal="animation_finished" from="Player" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="timeout" from="HitCooldown" to="." method="_on_hit_cooldown_timeout"]
