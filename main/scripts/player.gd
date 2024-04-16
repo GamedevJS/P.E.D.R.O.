@@ -1,36 +1,42 @@
 extends CharacterBody2D
 
-var SPEED = 100.0
+var SPEED = 5000.0
 var DIR : Vector2 = Vector2.ZERO
+var ATTACKING : bool = false
 
-@onready var animated_sprites := $Sprites as AnimatedSprite2D
+@onready var animation := $Player as AnimationPlayer
+@onready var sprites := $Sprites as Sprite2D
 
-func _ready():
-	pass
-
+	
 func _physics_process(delta):
 	DIR = Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
 	)
-	velocity = DIR * SPEED
+	velocity = DIR * SPEED * delta
 	move_and_slide()
 
 func _process(delta):
 	animation_handler()
 
+
 func animation_handler():
-	if velocity != Vector2.ZERO:
-		if velocity.x > 0:
-			animated_sprites.play("running")
-			animated_sprites.set_flip_h(false)
+	if DIR.x != 0:
+		sprites.scale.x = DIR.x
+	if ATTACKING == false:
+		if velocity != Vector2.ZERO:
+			animation.play("running")
 		else:
-			animated_sprites.play("running")
-			animated_sprites.set_flip_h(true)
-	else:
-		animated_sprites.play("idle")
-	
+			animation.play("idle")
 	if Input.is_action_just_pressed("attack1"):
-		animated_sprites.play("attack1_side")
-		
-	
+		ATTACKING = true
+		SPEED = 1000.0
+		if DIR.y == -1:
+			animation.play("attack1_up")
+		else:
+			animation.play("attack1_side")
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name.contains("attack1"):
+		ATTACKING = false
+		SPEED = 5000.0
