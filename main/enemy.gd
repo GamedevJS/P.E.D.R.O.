@@ -1,6 +1,12 @@
 extends CharacterBody2D
 
-var SPEED = 2500.0
+var STATS = {
+	speed = 2500,
+	health = 50
+}
+
+var SPEED
+var HEALTH
 var DIR : Vector2 = Vector2.ZERO
 var ATTACKING : bool = false
 var IS_ALIVE = true
@@ -14,6 +20,11 @@ var BASE_DAMAGE = 10
 @onready var sprites := $Sprites as Sprite2D
 @onready var detection_area := $DetectionArea as Area2D
 
+
+func _ready():
+	SPEED = STATS.speed
+	HEALTH = STATS.health
+	
 
 func _physics_process(delta):
 	if CHASE and !IN_RANGE:
@@ -53,6 +64,7 @@ func attack():
 
 func _on_hitbox_body_entered(body):
 	IN_RANGE = true
+	print("enemy hit")
 
 
 func _on_hitbox_body_exited(body):

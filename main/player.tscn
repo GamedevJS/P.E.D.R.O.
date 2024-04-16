@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c2ppriesvmdgu"]
+[gd_scene load_steps=20 format=3 uid="uid://c2ppriesvmdgu"]
 
 [ext_resource type="Texture2D" uid="uid://s676n3affxgb" path="res://assets/Warrior_Blue.png" id="1_m38ol"]
 [ext_resource type="Script" path="res://main/scripts/player.gd" id="1_qm2sx"]
@@ -8,9 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://c1e16km1wm1hj" path="res://assets/attack2_up.png" id="6_x6kfy"]
 [ext_resource type="Texture2D" uid="uid://n8v4ym8gxaty" path="res://assets/attack1_down.png" id="7_5v0yj"]
 [ext_resource type="Texture2D" uid="uid://bwi0ib3g4nxmj" path="res://assets/dead.png" id="8_fou46"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_203jh"]
-radius = 11.0454
 
 [sub_resource type="Animation" id="Animation_5jbpr"]
 length = 0.001
@@ -391,16 +388,19 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_e2vhr"]
 radius = 39.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g3a05"]
+radius = 14.0
+height = 46.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_atam8"]
+radius = 22.0
+height = 64.0
+
 [node name="player" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
 collision_mask = 14
 script = ExtResource("1_qm2sx")
-
-[node name="Feet" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 22)
-shape = SubResource("CircleShape2D_203jh")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
@@ -428,6 +428,7 @@ hframes = 6
 vframes = 8
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
 collision_mask = 4
 
 [node name="Body" type="CollisionShape2D" parent="Hitbox"]
@@ -437,6 +438,19 @@ debug_color = Color(0.862745, 0, 0.301961, 0.419608)
 
 [node name="HitCooldown" type="Timer" parent="."]
 wait_time = 0.5
+
+[node name="Feet" type="CollisionShape2D" parent="."]
+position = Vector2(0, 9)
+shape = SubResource("CapsuleShape2D_g3a05")
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(-60, 0)
+shape = SubResource("CapsuleShape2D_atam8")
+debug_color = Color(0.231373, 0.627451, 0.333333, 0.419608)
 
 [connection signal="animation_finished" from="Player" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

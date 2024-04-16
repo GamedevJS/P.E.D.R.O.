@@ -803,7 +803,6 @@ script = ExtResource("2_u123i")
 [node name="player" parent="." instance=ExtResource("2_sk5wd")]
 position = Vector2(1, -43)
 scale = Vector2(0.5, 0.5)
-collision_mask = 14
 
 [node name="Enemy" parent="." instance=ExtResource("4_jr85h")]
 position = Vector2(220, 86)
