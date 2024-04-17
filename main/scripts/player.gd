@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 var STATS = {
@@ -11,34 +12,40 @@ var ATTACKING : bool = false
 var IS_ALIVE = true
 var HEALTH;
 var INVINCILITY = false
+var UNDER_ATTACK : bool = false
 
 @onready var animation := $Player as AnimationPlayer
 @onready var sprites := $Sprites as Sprite2D
 @onready var hit_cooldown_timer := $HitCooldown as Timer
 
-var enemy_attack : Area2D = null
 
 func _ready():
 	SPEED = STATS.speed
 	HEALTH = STATS.health
 	
+	
 func _physics_process(delta):
+	movment_handler(delta)
+	move_and_slide()
+	
+
+func _process(delta):
+	animation_handler()	
+
+
+func damage_handler():
+	if UNDER_ATTACK:
+		print("enemy hit")
+		
+
+
+func movment_handler(delta):
 	DIR = Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up")
 	)
 	velocity = DIR * SPEED * delta
 	
-	if HEALTH <= 0:
-		print("you died")
-		IS_ALIVE = true
-		queue_free()
-		
-	move_and_slide()
-
-func _process(delta):
-	animation_handler()	
-
 
 func animation_handler():
 	if DIR.x != 0:
@@ -59,33 +66,10 @@ func animation_handler():
 			animation.play("attack1_side")
 
 
-func player_attack():
-	pass
-
-
 # Signals
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name.contains("attack1"):
 		ATTACKING = false
 		SPEED = STATS.speed
-
-
-func _on_hurtbox_body_entered(body):
-	print(body)
-	enemy_attack = body
-	if body.has_method("enemy_attack") and !INVINCILITY:
-		HEALTH -= 10
-		print("player health: " + HEALTH)
-		INVINCILITY = true
-		hit_cooldown_timer.start()
-
-
-func _on_hurtbox_body_exited(body):
-	enemy_attack = null
-	
-
-func _on_hit_cooldown_timeout():
-	INVINCILITY = false
-
 

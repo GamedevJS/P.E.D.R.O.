@@ -1,13 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://seubp2j2y74h"]
+[gd_scene load_steps=10 format=3 uid="uid://seubp2j2y74h"]
 
-[ext_resource type="Script" path="res://main/enemy.gd" id="1_4s5c5"]
+[ext_resource type="Script" path="res://main/scripts/Goblin.gd" id="1_4s5c5"]
 [ext_resource type="Texture2D" uid="uid://b7g7kb84srqk7" path="res://assets/Torch_Red.png" id="1_ohakn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n2a7x"]
 radius = 151.053
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_mj2sc"]
-radius = 30.5
 
 [sub_resource type="Animation" id="Animation_wt2tk"]
 length = 0.001
@@ -174,35 +171,26 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_55nue"]
-radius = 42.4264
+radius = 36.0139
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_30o4y"]
-radius = 13.0
+radius = 16.0
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 35
 script = ExtResource("1_4s5c5")
 
 [node name="Sprites" type="Sprite2D" parent="."]
 texture = ExtResource("1_ohakn")
 
 [node name="DetectionArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="Vision" type="CollisionShape2D" parent="DetectionArea"]
-visible = false
 shape = SubResource("CircleShape2D_n2a7x")
 debug_color = Color(0.454902, 0.588235, 0.215686, 0.419608)
-
-[node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 32
-
-[node name="Body" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(2, 4)
-shape = SubResource("CircleShape2D_mj2sc")
-debug_color = Color(0.964706, 0.180392, 0.0666667, 0.419608)
 
 [node name="Player" type="AnimationPlayer" parent="."]
 libraries = {
@@ -210,22 +198,19 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="AttackArea" type="Area2D" parent="."]
-collision_layer = 32
-collision_mask = 16
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
 
-[node name="AttackBox" type="CollisionShape2D" parent="AttackArea"]
+[node name="collision" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(1, 5)
 shape = SubResource("CircleShape2D_55nue")
-debug_color = Color(0.360784, 0.611765, 0.235294, 0.419608)
+debug_color = Color(0.898039, 0.286275, 0.321569, 0.419608)
 
-[node name="Feet" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(1, 24)
+[node name="body" type="CollisionShape2D" parent="."]
+position = Vector2(0, 22)
 shape = SubResource("CircleShape2D_30o4y")
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
-[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
-[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]

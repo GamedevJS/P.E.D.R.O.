@@ -385,13 +385,11 @@ _data = {
 "running": SubResource("Animation_6slty")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ggkec"]
-radius = 14.0
-height = 28.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g3a05"]
-radius = 20.0
-height = 48.0
+radius = 14.0
+height = 58.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_embmn"]
 
 [node name="player" type="CharacterBody2D"]
 z_index = 1
@@ -400,7 +398,6 @@ collision_mask = 38
 script = ExtResource("1_qm2sx")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
 zoom = Vector2(2, 2)
 limit_smoothed = true
 position_smoothing_enabled = true
@@ -428,18 +425,20 @@ vframes = 8
 [node name="HitCooldown" type="Timer" parent="."]
 wait_time = 0.5
 
-[node name="body" type="CollisionShape2D" parent="."]
-position = Vector2(0, 18)
-shape = SubResource("CapsuleShape2D_ggkec")
-
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
 
-[node name="collision" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(0, 8)
+[node name="collision" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_g3a05")
 debug_color = Color(0.92549, 0.25098, 0.290196, 0.419608)
 
+[node name="feet" type="CollisionShape2D" parent="."]
+position = Vector2(0, 23)
+shape = SubResource("CircleShape2D_embmn")
+
 [connection signal="animation_finished" from="Player" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="HitCooldown" to="." method="_on_hit_cooldown_timeout"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="body_exited" from="Hurtbox" to="." method="_on_hurtbox_body_exited"]
