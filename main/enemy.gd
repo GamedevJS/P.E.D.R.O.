@@ -29,7 +29,7 @@ func _ready():
 func _physics_process(delta):
 	if CHASE and !IN_RANGE:
 		DIR = (PLAYER.position - position).normalized()
-		velocity = DIR * SPEED * delta
+		#velocity = DIR * SPEED * delta
 	else:
 		velocity = Vector2.ZERO
 	move_and_slide()
@@ -58,14 +58,18 @@ func _on_detection_area_body_exited(body):
 	CHASE = false
 
 
-func attack():
+func enemy_attack():
 	pass
 
 
 func _on_hitbox_body_entered(body):
+	if body.has_method("player_attack"):
+		HEALTH -= 10
+		print("enemy health: " + HEALTH)
+
+func _on_attack_area_body_entered(body):
 	IN_RANGE = true
-	print("enemy hit")
 
 
-func _on_hitbox_body_exited(body):
+func _on_attack_area_body_exited(body):
 	IN_RANGE = false

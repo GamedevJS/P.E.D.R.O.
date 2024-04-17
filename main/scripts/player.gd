@@ -16,7 +16,7 @@ var INVINCILITY = false
 @onready var sprites := $Sprites as Sprite2D
 @onready var hit_cooldown_timer := $HitCooldown as Timer
 
-var enemy : CharacterBody2D = null
+var enemy_attack : Area2D = null
 
 func _ready():
 	SPEED = STATS.speed
@@ -59,18 +59,33 @@ func animation_handler():
 			animation.play("attack1_side")
 
 
+func player_attack():
+	pass
+
+
+# Signals
+
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name.contains("attack1"):
 		ATTACKING = false
 		SPEED = STATS.speed
 
 
-func _on_hitbox_body_entered(body):
-	if body.has_method("attack") and !INVINCILITY:
+func _on_hurtbox_body_entered(body):
+	print(body)
+	enemy_attack = body
+	if body.has_method("enemy_attack") and !INVINCILITY:
 		HEALTH -= 10
-		print(HEALTH)
+		print("player health: " + HEALTH)
 		INVINCILITY = true
 		hit_cooldown_timer.start()
 
+
+func _on_hurtbox_body_exited(body):
+	enemy_attack = null
+	
+
 func _on_hit_cooldown_timeout():
 	INVINCILITY = false
+
+

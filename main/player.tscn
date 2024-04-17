@@ -385,16 +385,15 @@ _data = {
 "running": SubResource("Animation_6slty")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_e2vhr"]
-radius = 39.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g3a05"]
 radius = 14.0
-height = 46.0
+height = 58.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_atam8"]
 radius = 22.0
 height = 64.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_embmn"]
 
 [node name="player" type="CharacterBody2D"]
 z_index = 1
@@ -427,32 +426,32 @@ texture = ExtResource("1_m38ol")
 hframes = 6
 vframes = 8
 
-[node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 4
-
-[node name="Body" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(1, 4)
-shape = SubResource("CircleShape2D_e2vhr")
-debug_color = Color(0.862745, 0, 0.301961, 0.419608)
-
 [node name="HitCooldown" type="Timer" parent="."]
 wait_time = 0.5
 
-[node name="Feet" type="CollisionShape2D" parent="."]
-position = Vector2(0, 9)
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 62
+
+[node name="Body" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_g3a05")
+debug_color = Color(0.92549, 0.25098, 0.290196, 0.419608)
 
 [node name="AttackArea" type="Area2D" parent="."]
 collision_layer = 32
-collision_mask = 4
+collision_mask = 16
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+[node name="AttackZone" type="CollisionShape2D" parent="AttackArea"]
 position = Vector2(-60, 0)
 shape = SubResource("CapsuleShape2D_atam8")
 debug_color = Color(0.231373, 0.627451, 0.333333, 0.419608)
 
+[node name="feet" type="CollisionShape2D" parent="."]
+position = Vector2(0, 23)
+shape = SubResource("CircleShape2D_embmn")
+
 [connection signal="animation_finished" from="Player" to="." method="_on_animation_player_animation_finished"]
-[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
-[connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
 [connection signal="timeout" from="HitCooldown" to="." method="_on_hit_cooldown_timeout"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="body_exited" from="Hurtbox" to="." method="_on_hurtbox_body_exited"]
