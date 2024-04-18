@@ -1,4 +1,4 @@
-class_name AttackComponent
+class_name EnemyAttackComponent
 extends Area2D
 
 @export var DAMAGE : float
@@ -14,13 +14,14 @@ func _process(delta):
 		
 		
 func attack():
+	if TARGET != null:
 		TARGET.on_hit(DAMAGE)
 		CREATURE.ATTACK_COOLDOWN = true
 		CREATURE.attack_cooldown.start()
 
 
 func _on_hitbox_area_entered(area : Area2D):
-	if area is HitboxComponent:
+	if area.get_parent() is Player:
 		TARGET = area
 		CREATURE.ATTACKING = true
 
