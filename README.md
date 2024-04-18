@@ -1,4 +1,4 @@
 # Power 🤖
 
 ### Pastas compartilhadas
-- [Drive](https://discord.com/channels/@me/1228772266058190848/1229157052476031117)
+- [Drive](https://drive.google.com/drive/folders/1NyRpS998gRYp9Z4GqUFRIKB3Dt9dMXaq)
