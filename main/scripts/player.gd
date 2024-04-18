@@ -13,12 +13,14 @@ var IS_ALIVE = true
 var HEALTH;
 var INVINCILITY = false
 var UNDER_ATTACK : bool = false
+var ATTACK_COOLDOWN : bool = false
 
 var SEN_45 = pow(2, 1/2)/2
 
 @onready var animation := $Player as AnimationPlayer
 @onready var sprites := $Sprites as Sprite2D
 @onready var hit_cooldown_timer := $HitCooldown as Timer
+@onready var attack_cooldown_timer := $AttackCooldown as Timer
 
 
 func _ready():
@@ -50,16 +52,19 @@ func movment_handler(delta):
 	
 
 func animation_handler():
-	if DIR.x != 0:
-		sprites.scale.x = DIR.x
-	if ATTACKING == false:
+	
+	if !ATTACKING:
+		if DIR.x != 0:
+			sprites.scale.x = DIR.x
 		if velocity != Vector2.ZERO:
 			animation.play("running")
 		else:
 			animation.play("idle")
-	if Input.is_action_just_pressed("attack1"):
+			
+	if Input.is_action_just_pressed("attack1") and !ATTACK_COOLDOWN:
 		ATTACKING = true
 		SPEED = SPEED * 0.1
+		ATTACK_COOLDOWN = true
 		var attack_direction = handle_attack_direction()
 		if attack_direction == 1:
 			animation.play("attack1_up")
@@ -71,14 +76,8 @@ func animation_handler():
 			sprites.scale.x = 1
 		elif attack_direction == 4:
 			animation.play("attack1_down")
-		
-			
-		#if DIR.y == -1:
-			#animation.play("attack1_up")
-		#elif DIR.y == 1:
-			#animation.play("attack1_down")
-		#else:
-			#animation.play("attack1_side")
+		attack_cooldown_timer.set_wait_time(animation.current_animation_length)
+		attack_cooldown_timer.start()
 
 func handle_attack_direction():
 	var attack_dir = get_local_mouse_position() - position
@@ -110,3 +109,7 @@ func recieve_damage(damage: int):
 
 func _on_hit_cooldown_timeout():
 	INVINCILITY = false
+
+
+func _on_attack_cooldown_timeout():
+	ATTACK_COOLDOWN = false

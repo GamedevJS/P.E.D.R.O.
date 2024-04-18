@@ -65,6 +65,7 @@ func _on_detection_area_body_exited(body):
 func _on_hitbox_body_entered(body):
 	if body is Player:
 		ATTACKING = true
+		attack_cooldown.start()
 	
 
 func _on_hitbox_body_exited(body):
