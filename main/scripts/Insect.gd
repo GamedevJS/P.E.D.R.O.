@@ -1,10 +1,13 @@
 class_name Insect
 extends BaseEnemy
 
+var BASE_SPEED : float = 2500.0
+
+func _init():
+	SPEED = BASE_SPEED
 
 func _physics_process(delta):
 	movment_handler(delta)
-	attack_handler()
 	move_and_slide()
 
 
@@ -29,47 +32,6 @@ func movment_handler(delta):
 		velocity = DIR * SPEED * delta
 	else:
 		velocity = Vector2.ZERO
-
-
-func attack_handler():
-	if PLAYER != null and ATTACKING:
-		if !ATTACK_COOLDOWN:
-			var damege_func = Callable(PLAYER, "recieve_damage")
-			damege_func.call(DAMAGE)
-			ATTACK_COOLDOWN = true
-			attack_cooldown.start()
-
-func recieve_damage(damage: int):
-	HEALTH -= damage
-	print(HEALTH)
-	if HEALTH <= 0:
-		on_death()
-		
-
-func on_death():
-	print(name + " died")
-	self.queue_free()
-
-### Signals
-
-func _on_detection_area_body_entered(body):
-	PLAYER = body
-	CHASE = true
-
-
-func _on_detection_area_body_exited(body):
-	PLAYER = null
-	CHASE = false
-
-
-func _on_hitbox_body_entered(body):
-	if body is Player:
-		ATTACKING = true
-		attack_cooldown.start()
-	
-
-func _on_hitbox_body_exited(body):
-	ATTACKING = false
 
 
 func _on_attack_cooldown_timeout():

@@ -1,19 +1,8 @@
 class_name Player
-extends CharacterBody2D
+extends BaseCreature
 
-var STATS = {
-	speed = 5000,
-	health = 100
-}
 
-var SPEED;
-var DIR : Vector2 = Vector2.ZERO
-var ATTACKING : bool = false
-var IS_ALIVE = true
-var HEALTH;
-var INVINCILITY = false
-var UNDER_ATTACK : bool = false
-var ATTACK_COOLDOWN : bool = false
+var BASE_SPEED = 5000.0
 
 var SEN_45 = pow(2, 1/2)/2
 
@@ -24,8 +13,7 @@ var SEN_45 = pow(2, 1/2)/2
 
 
 func _ready():
-	SPEED = STATS.speed
-	HEALTH = STATS.health
+	SPEED = BASE_SPEED
 	
 	
 func _physics_process(delta):
@@ -35,11 +23,6 @@ func _physics_process(delta):
 
 func _process(delta):
 	animation_handler()	
-
-
-func damage_handler():
-	if UNDER_ATTACK:
-		print("enemy hit")
 		
 
 
@@ -97,19 +80,18 @@ func handle_attack_direction():
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name.contains("attack1"):
 		ATTACKING = false
-		SPEED = STATS.speed
-
-func recieve_damage(damage: int):
-	if !INVINCILITY:
-		HEALTH -= damage
-		INVINCILITY = true
-		print(HEALTH)
-		hit_cooldown_timer.start()
-	
+		
+		
 
 func _on_hit_cooldown_timeout():
 	INVINCILITY = false
 
 
+func _on_hitbox_damage_recieved():
+	INVINCILITY = true
+	hit_cooldown_timer.start()
+
+
 func _on_attack_cooldown_timeout():
+	SPEED = BASE_SPEED
 	ATTACK_COOLDOWN = false

@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://bh4oh8jasy0qv"]
+[gd_scene load_steps=15 format=3 uid="uid://bh4oh8jasy0qv"]
 
 [ext_resource type="Script" path="res://main/scripts/Insect.gd" id="1_fppwp"]
 [ext_resource type="Texture2D" uid="uid://bgg0eketig811" path="res://assets/inimigo1/gustavo1.png" id="2_dosef"]
 [ext_resource type="PackedScene" uid="uid://daqilkcj4va0q" path="res://main/scenes/DetectionComponent.tscn" id="3_mas4k"]
 [ext_resource type="PackedScene" uid="uid://07bodgbfi3i8" path="res://main/scenes/HitboxComponent.tscn" id="3_ocqfk"]
 [ext_resource type="PackedScene" uid="uid://bdre7ohepr58m" path="res://main/scenes/HealthComponent.tscn" id="4_8qe7c"]
-[ext_resource type="PackedScene" uid="uid://ttcr6hqr3f3f" path="res://main/scenes/AttackComponent.tscn" id="7_ahjv6"]
 [ext_resource type="Script" path="res://main/scripts/AttackRangeComponent.gd" id="7_seqgh"]
 
 [sub_resource type="Animation" id="Animation_16gfy"]
@@ -200,16 +199,13 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_jc0g6"]
 radius = 14.0357
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_hbpfg"]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_1rpvu"]
 radius = 151.053
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_hbpfg"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_pd2kd"]
 radius = 24.1868
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_le8g0"]
-radius = 24.0832
 
 [node name="Insect" type="CharacterBody2D"]
 collision_layer = 4
@@ -225,6 +221,13 @@ libraries = {
 position = Vector2(1, -1)
 shape = SubResource("CircleShape2D_jc0g6")
 
+[node name="DetectionArea" parent="." instance=ExtResource("3_mas4k")]
+
+[node name="Vision" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(1.55, 0)
+shape = SubResource("CircleShape2D_1rpvu")
+debug_color = Color(0.454902, 0.588235, 0.215686, 0.419608)
+
 [node name="AttackCooldown" type="Timer" parent="."]
 
 [node name="Sprites" type="Sprite2D" parent="."]
@@ -233,7 +236,6 @@ texture = ExtResource("2_dosef")
 hframes = 2
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_8qe7c")]
-MAX_HEALTH = 50.0
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_ocqfk")]
 
@@ -241,33 +243,14 @@ MAX_HEALTH = 50.0
 shape = SubResource("CircleShape2D_hbpfg")
 debug_color = Color(0.92549, 0.196078, 0.482353, 0.419608)
 
-[node name="DetectionArea" parent="." instance=ExtResource("3_mas4k")]
-
-[node name="Vision" type="CollisionShape2D" parent="DetectionArea"]
-position = Vector2(1.55, 0)
-shape = SubResource("CircleShape2D_1rpvu")
-debug_color = Color(0.454902, 0.588235, 0.215686, 0.419608)
-
 [node name="AttackRangeComponent" type="Area2D" parent="."]
-collision_layer = 0
 script = ExtResource("7_seqgh")
 
 [node name="range" type="CollisionShape2D" parent="AttackRangeComponent"]
 shape = SubResource("CircleShape2D_pd2kd")
 debug_color = Color(0.2, 0.619608, 0.482353, 0.419608)
 
-[node name="AttackComponent" parent="." instance=ExtResource("7_ahjv6")]
-position = Vector2(-30, 0)
-collision_mask = 32
-DAMAGE = 10.0
-
-[node name="attack" type="CollisionShape2D" parent="AttackComponent"]
-position = Vector2(30, 0)
-shape = SubResource("CircleShape2D_le8g0")
-debug_color = Color(0.490196, 0.541176, 0.615686, 0.419608)
-
 [connection signal="animation_finished" from="Player" to="." method="_on_player_animation_finished"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
 [connection signal="body_entered" from="AttackRangeComponent" to="AttackRangeComponent" method="_on_body_entered"]
 [connection signal="body_exited" from="AttackRangeComponent" to="AttackRangeComponent" method="_on_body_exited"]
-[connection signal="area_exited" from="AttackComponent" to="AttackComponent" method="_on_area_exited"]
