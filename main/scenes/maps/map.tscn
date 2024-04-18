@@ -1,12 +1,12 @@
 [gd_scene load_steps=7 format=3 uid="uid://c1tqh1e6h6y0f"]
 
-[ext_resource type="Texture2D" uid="uid://dpjdvebxmtikw" path="res://assets/spritesheet.png" id="1_1bamu"]
-[ext_resource type="PackedScene" uid="uid://c2ppriesvmdgu" path="res://main/player.tscn" id="2_sk5wd"]
-[ext_resource type="Script" path="res://main/scripts/map.gd" id="2_u123i"]
-[ext_resource type="PackedScene" uid="uid://seubp2j2y74h" path="res://main/enemy.tscn" id="4_jr85h"]
+[ext_resource type="Texture2D" uid="uid://dpjdvebxmtikw" path="res://assets/spritesheet.png" id="1_6xd8h"]
+[ext_resource type="Script" path="res://main/scripts/map.gd" id="2_jlkem"]
+[ext_resource type="PackedScene" uid="uid://c2ppriesvmdgu" path="res://main/scenes/player.tscn" id="3_i0nlv"]
+[ext_resource type="PackedScene" uid="uid://bh4oh8jasy0qv" path="res://main/scenes/enemies/insect.tscn" id="5_20ihn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bc8cq"]
-texture = ExtResource("1_1bamu")
+texture = ExtResource("1_6xd8h")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -798,16 +798,12 @@ layer_0/tile_data = PackedInt32Array(458768, 65536, 2, 393232, 0, 10, 327696, 0,
 layer_1/name = "layer1"
 layer_1/y_sort_enabled = true
 layer_1/tile_data = PackedInt32Array(65539, 589824, 5, 65540, 589824, 5, 4, 589824, 5, 3, 589824, 5)
-script = ExtResource("2_u123i")
+script = ExtResource("2_jlkem")
 
-[node name="player" parent="." instance=ExtResource("2_sk5wd")]
+[node name="player" parent="." instance=ExtResource("3_i0nlv")]
 position = Vector2(1, -43)
 scale = Vector2(0.5, 0.5)
 
-[node name="Enemy" parent="." instance=ExtResource("4_jr85h")]
-position = Vector2(220, 86)
-scale = Vector2(0.4, 0.4)
-
-[node name="Enemy2" parent="." instance=ExtResource("4_jr85h")]
-position = Vector2(-151, 28)
-scale = Vector2(0.4, 0.4)
+[node name="Insect" parent="." instance=ExtResource("5_20ihn")]
+position = Vector2(-149, 14)
+scale = Vector2(0.6, 0.6)
