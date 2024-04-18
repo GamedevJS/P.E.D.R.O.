@@ -210,7 +210,10 @@ debug_color = Color(0.898039, 0.286275, 0.321569, 0.419608)
 position = Vector2(0, 22)
 shape = SubResource("CircleShape2D_30o4y")
 
+[node name="AttackCooldown" type="Timer" parent="."]
+
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_exited" from="Hitbox" to="." method="_on_hitbox_body_exited"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

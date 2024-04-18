@@ -1,4 +1,4 @@
-class_name Goblin
+class_name Insect
 extends BaseEnemy
 
 
@@ -6,6 +6,21 @@ func _physics_process(delta):
 	movment_handler(delta)
 	attack_handler()
 	move_and_slide()
+
+
+func _process(delta):
+	if DIR.x > 0:
+		sprites.scale.x = -1
+	elif DIR.x < 0:
+		sprites.scale.x = 1
+		
+	if !ATTACKING:
+		if velocity != Vector2.ZERO:
+			animation.play("run")
+		else:
+			animation.stop()
+	else:
+		animation.play("attack")
 
 
 func movment_handler(delta):
@@ -16,22 +31,6 @@ func movment_handler(delta):
 		velocity = Vector2.ZERO
 
 
-func _process(delta):
-	animation_handler()
-
-
-func animation_handler():
-	if DIR.x > 0:
-		sprites.scale.x = 1
-	elif DIR.x < 0:
-		sprites.scale.x = -1
-	if ATTACKING == false:
-		if velocity != Vector2.ZERO:
-			animation.play("running")
-		else:
-			animation.play("idle")
-			
-
 func attack_handler():
 	if PLAYER != null and ATTACKING:
 		if !ATTACK_COOLDOWN:
@@ -40,6 +39,16 @@ func attack_handler():
 			ATTACK_COOLDOWN = true
 			attack_cooldown.start()
 
+func recieve_damage(damage: int):
+	HEALTH -= damage
+	print(HEALTH)
+	if HEALTH <= 0:
+		on_death()
+		
+
+func on_death():
+	print(name + " died")
+	self.queue_free()
 
 ### Signals
 
@@ -47,11 +56,10 @@ func _on_detection_area_body_entered(body):
 	PLAYER = body
 	CHASE = true
 
+
 func _on_detection_area_body_exited(body):
 	PLAYER = null
 	CHASE = false
-
-
 
 
 func _on_hitbox_body_entered(body):
