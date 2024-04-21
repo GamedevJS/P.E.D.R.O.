@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bh4oh8jasy0qv"]
+[gd_scene load_steps=19 format=3 uid="uid://bh4oh8jasy0qv"]
 
 [ext_resource type="Script" path="res://main/scripts/Insect.gd" id="1_fppwp"]
 [ext_resource type="Texture2D" uid="uid://bgg0eketig811" path="res://assets/inimigo1/gustavo1.png" id="2_dosef"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bdre7ohepr58m" path="res://main/scenes/HealthComponent.tscn" id="4_8qe7c"]
 [ext_resource type="PackedScene" uid="uid://ttcr6hqr3f3f" path="res://main/scenes/EnemyAttackComponent.tscn" id="7_di5l3"]
 [ext_resource type="Script" path="res://main/scripts/AttackRangeComponent.gd" id="7_seqgh"]
+[ext_resource type="PackedScene" uid="uid://cct5qbakh68td" path="res://main/scenes/HealthBar.tscn" id="8_2mymm"]
 
 [sub_resource type="Animation" id="Animation_16gfy"]
 length = 0.001
@@ -391,8 +392,15 @@ hframes = 2
 [node name="InvincibilityTimer" type="Timer" parent="."]
 wait_time = 0.3
 
+[node name="HealthBar" parent="." instance=ExtResource("8_2mymm")]
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 21.0
+offset_bottom = -28.0
+
 [connection signal="animation_finished" from="Player" to="." method="_on_player_animation_finished"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="damage_recieved" from="HealthComponent" to="HealthBar" method="_on_health_component_damage_recieved"]
 [connection signal="damage_recieved" from="HitboxComponent" to="." method="_on_hitbox_component_damage_recieved"]
 [connection signal="body_entered" from="AttackRangeComponent" to="AttackRangeComponent" method="_on_body_entered"]
 [connection signal="body_exited" from="AttackRangeComponent" to="AttackRangeComponent" method="_on_body_exited"]

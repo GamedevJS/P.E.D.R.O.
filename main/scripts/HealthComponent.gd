@@ -1,6 +1,8 @@
 class_name HealthComponent
 extends Node2D
 
+signal damage_recieved
+
 @export var MAX_HEALTH = 100.0
 var HEALTH: float
 
@@ -10,7 +12,7 @@ func _ready():
 
 func handle_damage(damage: float):
 	HEALTH -= damage
-	print(HEALTH)
+	damage_recieved.emit()
 	if HEALTH <= 0:
 		get_parent().queue_free()
 		print(get_parent().name + " just died")
