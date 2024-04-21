@@ -27,12 +27,14 @@ func _process(delta):
 
 
 func movment_handler(delta):
-	DIR = Vector2(
-		Input.get_action_strength("right") - Input.get_action_strength("left"),
-		Input.get_action_strength("down") - Input.get_action_strength("up")
-	)
-	velocity = DIR * SPEED * delta
-	
+		DIR = Vector2(
+			Input.get_action_strength("right") - Input.get_action_strength("left"),
+			Input.get_action_strength("down") - Input.get_action_strength("up")
+		)
+		velocity = DIR * SPEED * delta
+		
+		if INVINCILITY:
+			velocity += KNOCKBACK
 
 func animation_handler():
 	
@@ -90,11 +92,14 @@ func _on_animation_player_animation_finished(anim_name):
 		
 func _on_hit_cooldown_timeout():
 	INVINCILITY = false
+	sprites.set_modulate(Color(1,1, 1, 1))
 
 
 func _on_hitbox_damage_recieved():
 	INVINCILITY = true
 	hit_cooldown_timer.start()
+	sprites.set_modulate(Color(218,104, 97, 1))
+
 
 
 func _on_attack_cooldown_timeout():
