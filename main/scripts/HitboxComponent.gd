@@ -9,5 +9,4 @@ func on_hit(damage: float, knockback: Vector2, stun_duration: float):
 	if HEALT_COMPONENT != null:
 		HEALT_COMPONENT.handle_damage(damage)
 		damage_recieved.emit()
-		
 		get_parent().KNOCKBACK = knockback

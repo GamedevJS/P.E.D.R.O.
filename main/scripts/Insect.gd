@@ -16,23 +16,38 @@ func _process(delta):
 		sprites.scale.x = -1
 	elif DIR.x < 0:
 		sprites.scale.x = 1
-		
-	if !ATTACKING:
-		if velocity != Vector2.ZERO:
-			animation.play("run")
+	
+	if !INVINCILITY:
+		if !ATTACKING:
+			if velocity != Vector2.ZERO:
+				animation.play("run")
+			else:
+				animation.stop()
 		else:
-			animation.stop()
+			animation.play("attack")
 	else:
-		animation.play("attack")
+		animation.play("hurt")
 
 
 func movment_handler(delta):
 	if CHASE and !ATTACKING:
 		DIR = (PLAYER.position - position).normalized()
-		velocity = DIR * SPEED * delta
+		velocity = (DIR * SPEED * delta)
+		if INVINCILITY:
+			velocity -= KNOCKBACK
 	else:
 		velocity = Vector2.ZERO
 
 
 func _on_attack_cooldown_timeout():
 	ATTACK_COOLDOWN = false
+
+
+
+func _on_hitbox_component_damage_recieved():
+	INVINCILITY = true
+	hit_cooldown.start()
+
+
+func _on_invincibility_timer_timeout():
+	INVINCILITY = false
