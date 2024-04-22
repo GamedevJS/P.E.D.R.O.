@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://jpjjmx14tcyf"]
+[gd_scene load_steps=7 format=3 uid="uid://jpjjmx14tcyf"]
 
 [ext_resource type="Texture2D" uid="uid://3p2f48xyq251" path="res://assets/floor/chao1.png" id="1_bge48"]
-[ext_resource type="PackedScene" uid="uid://c2ppriesvmdgu" path="res://main/scenes/player.tscn" id="2_7bv5i"]
+[ext_resource type="PackedScene" uid="uid://c2ppriesvmdgu" path="res://main/scenes/player/player.tscn" id="2_7bv5i"]
 [ext_resource type="PackedScene" uid="uid://bh4oh8jasy0qv" path="res://main/scenes/enemies/insect.tscn" id="3_qbstx"]
+[ext_resource type="PackedScene" uid="uid://4p28ic2rwxu4" path="res://main/scenes/enemies/insect2.tscn" id="4_cn74q"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pfh2d"]
 texture = ExtResource("1_bge48")
@@ -191,3 +192,6 @@ position = Vector2(-372, -93)
 
 [node name="Insect4" parent="." instance=ExtResource("3_qbstx")]
 position = Vector2(565, -154)
+
+[node name="Insect5" parent="." instance=ExtResource("4_cn74q")]
+position = Vector2(-271, 4)

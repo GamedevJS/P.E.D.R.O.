@@ -3,14 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://s676n3affxgb" path="res://assets/Warrior_Blue.png" id="1_m38ol"]
 [ext_resource type="Script" path="res://main/scripts/player.gd" id="1_qm2sx"]
 [ext_resource type="Texture2D" uid="uid://1wb58jqom81d" path="res://assets/attack1_side.png" id="2_gsqs4"]
-[ext_resource type="PackedScene" uid="uid://bdre7ohepr58m" path="res://main/scenes/HealthComponent.tscn" id="2_ufvpn"]
+[ext_resource type="PackedScene" uid="uid://bdre7ohepr58m" path="res://main/scenes/generic/HealthComponent.tscn" id="2_ufvpn"]
 [ext_resource type="Texture2D" uid="uid://b1abjki4fxdyo" path="res://assets/walking.png" id="4_vxtik"]
 [ext_resource type="Texture2D" uid="uid://dtbpqle4hr5ti" path="res://assets/idle.png" id="5_ft3xm"]
 [ext_resource type="Texture2D" uid="uid://c1e16km1wm1hj" path="res://assets/attack2_up.png" id="6_x6kfy"]
 [ext_resource type="Texture2D" uid="uid://n8v4ym8gxaty" path="res://assets/attack1_down.png" id="7_5v0yj"]
 [ext_resource type="Texture2D" uid="uid://bwi0ib3g4nxmj" path="res://assets/dead.png" id="8_fou46"]
-[ext_resource type="PackedScene" uid="uid://07bodgbfi3i8" path="res://main/scenes/HitboxComponent.tscn" id="9_61iej"]
-[ext_resource type="PackedScene" uid="uid://dwy6tdfqcmc6s" path="res://main/scenes/PlayerAttackComponent.tscn" id="11_f5auv"]
+[ext_resource type="PackedScene" uid="uid://07bodgbfi3i8" path="res://main/scenes/generic/HitboxComponent.tscn" id="9_61iej"]
+[ext_resource type="PackedScene" uid="uid://dwy6tdfqcmc6s" path="res://main/scenes/player/PlayerAttackComponent.tscn" id="11_f5auv"]
 
 [sub_resource type="Animation" id="Animation_5jbpr"]
 length = 0.001
