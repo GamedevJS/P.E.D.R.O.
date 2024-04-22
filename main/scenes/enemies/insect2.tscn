@@ -270,12 +270,6 @@ position = Vector2(30, 0)
 shape = SubResource("CircleShape2D_le8g0")
 debug_color = Color(0.490196, 0.541176, 0.615686, 0.419608)
 
-[node name="Sprites" type="Sprite2D" parent="."]
-position = Vector2(1, 1)
-texture = ExtResource("7_3fack")
-hframes = 3
-vframes = 4
-
 [node name="InvincibilityTimer" type="Timer" parent="."]
 wait_time = 0.3
 
@@ -300,6 +294,12 @@ script = ExtResource("7_seqgh")
 [node name="range" type="CollisionShape2D" parent="AttackRangeComponent"]
 shape = SubResource("CircleShape2D_pd2kd")
 debug_color = Color(0.2, 0.619608, 0.482353, 0.419608)
+
+[node name="Sprites" type="Sprite2D" parent="."]
+position = Vector2(1, 1)
+texture = ExtResource("7_3fack")
+hframes = 3
+vframes = 4
 
 [connection signal="animation_finished" from="Player" to="." method="_on_player_animation_finished"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

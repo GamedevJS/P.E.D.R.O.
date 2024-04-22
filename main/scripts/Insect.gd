@@ -29,19 +29,9 @@ func _process(delta):
 		animation.play("hurt")
 
 
-func movment_handler(delta):
-	if CHASE and !ATTACKING:
-		DIR = (PLAYER.position - position).normalized()
-		velocity = (DIR * SPEED * delta)
-		if INVINCILITY:
-			velocity -= KNOCKBACK
-	else:
-		velocity = Vector2.ZERO
-
 
 func _on_attack_cooldown_timeout():
 	ATTACK_COOLDOWN = false
-
 
 
 func _on_hitbox_component_damage_recieved():
