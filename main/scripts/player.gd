@@ -12,6 +12,8 @@ var SEN_45 = pow(2, 1/2)/2
 @onready var attack_cooldown_timer := $AttackCooldown as Timer
 @onready var attack := $Attack as PlayerAttackComponent
 
+@onready var laser_beam = load("res://main/scenes/projectiles/Laser.tscn")
+
 func _ready():
 	SPEED = BASE_SPEED
 	
@@ -50,24 +52,40 @@ func animation_handler():
 func attack_handler():
 	
 	if Input.is_action_just_pressed("attack1") and !ATTACK_COOLDOWN:
-		ATTACKING = true
-		SPEED = SPEED * 0.1
-		ATTACK_COOLDOWN = true
-		attack.enable_attack()
-		var attack_direction = handle_attack_direction()
-		if attack_direction == 1:
-			animation.play("attack1_up")
-			sprites.scale.x = 1
-		elif attack_direction == 2:
-			animation.play("attack1_side_left")
-		elif attack_direction == 3:
-			animation.play("attack1_side_right")
-		elif attack_direction == 4:
-			animation.play("attack1_down")
-			sprites.scale.x = 1
-		attack_cooldown_timer.set_wait_time(animation.current_animation_length)
-		attack_cooldown_timer.start()
+		attack1()
+	if Input.is_action_just_pressed("attack2") and !ATTACK_COOLDOWN:
+		attack2()
 		
+
+func attack1():
+	ATTACKING = true
+	SPEED = SPEED * 0.1
+	ATTACK_COOLDOWN = true
+	attack.enable_attack()
+	var attack_direction = handle_attack_direction()
+	if attack_direction == 1:
+		animation.play("attack1_up")
+		sprites.scale.x = 1
+	elif attack_direction == 2:
+		animation.play("attack1_side_left")
+	elif attack_direction == 3:
+		animation.play("attack1_side_right")
+	elif attack_direction == 4:
+		animation.play("attack1_down")
+		sprites.scale.x = 1
+	attack_cooldown_timer.set_wait_time(animation.current_animation_length)
+	attack_cooldown_timer.start()
+
+
+func attack2():
+	ATTACKING = true
+	ATTACK_COOLDOWN = true
+	var laser : Laser = laser_beam.instantiate()
+	laser.SPAWN_POS = position
+	get_parent().add_child(laser)
+	attack_cooldown_timer.set_wait_time(animation.current_animation_length)
+	attack_cooldown_timer.start()
+
 
 func handle_attack_direction():
 	var attack_dir = get_local_mouse_position() - position
@@ -85,7 +103,7 @@ func handle_attack_direction():
 # Signals
 
 func _on_animation_player_animation_finished(anim_name):
-	if anim_name.contains("attack1"):
+	if anim_name.contains("attack"):
 		ATTACKING = false
 		attack.disable_attack()
 		

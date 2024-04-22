@@ -20,7 +20,6 @@ func _process(delta):
 	
 	if !INVINCILITY:
 		if !ATTACKING and !ATTACK_COOLDOWN:
-			print("a")
 			animation.play("fly")
 		else:
 			animation.play("attack")
