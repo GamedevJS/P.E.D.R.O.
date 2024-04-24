@@ -330,7 +330,7 @@ collision_layer = 0
 collision_mask = 32
 script = ExtResource("3_1tuwr")
 DAMAGE = 60.0
-KNOCK_BACK_FORCE = 200.0
+KNOCK_BACK_FORCE = 100.0
 
 [node name="Area" type="CollisionShape2D" parent="AreaAttackComponent"]
 shape = SubResource("CircleShape2D_5hqpi")

@@ -62,7 +62,6 @@ func attack1():
 	ATTACKING = true
 	SPEED = SPEED * 0.1
 	ATTACK_COOLDOWN = true
-	attack.enable_attack()
 	var _pos = camera.get_global_mouse_position().x - position.x
 	if _pos >= 0:
 		animation.play("attack_right")
@@ -72,6 +71,7 @@ func attack1():
 		sprites.scale.x = 1
 	attack_cooldown_timer.set_wait_time(animation.current_animation_length)
 	attack_cooldown_timer.start()
+	attack.enable_attack()
 
 
 func attack2():

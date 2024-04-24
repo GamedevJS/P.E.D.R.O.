@@ -24,8 +24,8 @@ func _on_area_entered(area):
 
 
 func enable_attack():
-	self.set_monitoring(true)
+	set_monitoring(true)
 
 
 func disable_attack():
-	self.set_monitoring(false)
+	set_monitoring(false)
