@@ -1,10 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8aqwrc73frb2"]
+[gd_scene load_steps=11 format=3 uid="uid://b8aqwrc73frb2"]
 
 [ext_resource type="Texture2D" uid="uid://dhugbhm3sgudo" path="res://assets/explosao/explosao1.png" id="1_jju1r"]
 [ext_resource type="Script" path="res://main/scripts/Laser.gd" id="1_x3gry"]
+[ext_resource type="Script" path="res://main/scripts/AreaAttackComponent.gd" id="3_1tuwr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i6gdm"]
+radius = 1.41421
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5hqpi"]
+radius = 58.0775
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_idfhb"]
+radius = 2.23607
 
 [sub_resource type="Animation" id="Animation_6f0pl"]
-length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -63,7 +72,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [50]
+"values": [1000]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -75,7 +84,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.5]
+"values": [0.0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -87,7 +96,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [3]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -112,6 +121,30 @@ tracks/8/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(0.207843, 0.572549, 0.737255, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("CPUParticles2D:fixed_fps")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("CPUParticles2D:emission_rect_extents")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
 }
 
 [sub_resource type="Animation" id="Animation_xv2js"]
@@ -272,11 +305,9 @@ _data = {
 "shoot": SubResource("Animation_o60c0")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_i6gdm"]
-radius = 1.41421
-
 [node name="Laser" type="CharacterBody2D"]
-collision_mask = 38
+collision_layer = 0
+collision_mask = 32
 script = ExtResource("1_x3gry")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -287,25 +318,47 @@ texture = ExtResource("1_jju1r")
 hframes = 2
 vframes = 2
 
+[node name="tracer" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_i6gdm")
+
+[node name="Detonator" type="Timer" parent="."]
+
+[node name="AreaAttackComponent" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("3_1tuwr")
+DAMAGE = 60.0
+KNOCK_BACK_FORCE = 200.0
+
+[node name="Area" type="CollisionShape2D" parent="AreaAttackComponent"]
+shape = SubResource("CircleShape2D_5hqpi")
+disabled = true
+
+[node name="Collision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 6
+
+[node name="Body" type="CollisionShape2D" parent="Collision"]
+shape = SubResource("CircleShape2D_idfhb")
+debug_color = Color(0.94902, 0.172549, 0.392157, 0.419608)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_eibs1")
 }
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2(1, 0)
-amount = 50
-randomness = 0.5
-emission_shape = 1
-emission_sphere_radius = 0.5
+scale = Vector2(4, 4)
+amount = 1000
+emission_shape = 3
+emission_rect_extents = Vector2(2, 2)
 spread = 53.1
 gravity = Vector2(0, 0)
 color = Color(0.207843, 0.572549, 0.737255, 1)
 
-[node name="collision" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_i6gdm")
-
-[node name="Detonator" type="Timer" parent="."]
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="Detonator" to="." method="_on_detonator_timeout"]
+[connection signal="area_entered" from="AreaAttackComponent" to="AreaAttackComponent" method="_on_area_entered"]
+[connection signal="body_entered" from="Collision" to="." method="_on_collision_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
