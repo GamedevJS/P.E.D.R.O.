@@ -2,7 +2,8 @@ class_name Player
 extends BaseCreature
 
 
-var BASE_SPEED = 5000.0
+var BASE_SPEED : float = 5000.0
+var LASER_COOLDOWN : bool = false
 
 var SEN_45 = pow(2, 1/2)/2
 
@@ -10,7 +11,9 @@ var SEN_45 = pow(2, 1/2)/2
 @onready var sprites := $Sprites as Sprite2D
 @onready var hit_cooldown_timer := $HitCooldown as Timer
 @onready var attack_cooldown_timer := $AttackCooldown as Timer
+@onready var laser_cooldown_timer := $LaserCooldown as Timer
 @onready var attack := $Attack as PlayerAttackComponent
+@onready var camera := $Camera as Camera2D
 
 @onready var laser_beam = load("res://main/scenes/projectiles/Laser.tscn")
 
@@ -42,11 +45,9 @@ func animation_handler():
 	
 	if !ATTACKING:
 		if DIR.x != 0:
-			sprites.scale.x = DIR.x
-		if velocity != Vector2.ZERO:
-			animation.play("running")
-		else:
-			animation.play("idle")
+			sprites.scale.x = -DIR.x
+		#if velocity != Vector2.ZERO:
+		animation.play("walking")
 			
 
 func attack_handler():
@@ -62,16 +63,12 @@ func attack1():
 	SPEED = SPEED * 0.1
 	ATTACK_COOLDOWN = true
 	attack.enable_attack()
-	var attack_direction = handle_attack_direction()
-	if attack_direction == 1:
-		animation.play("attack1_up")
-		sprites.scale.x = 1
-	elif attack_direction == 2:
-		animation.play("attack1_side_left")
-	elif attack_direction == 3:
-		animation.play("attack1_side_right")
-	elif attack_direction == 4:
-		animation.play("attack1_down")
+	var _pos = camera.get_global_mouse_position().x - position.x
+	if _pos >= 0:
+		animation.play("attack_right")
+		sprites.scale.x = -1
+	else:
+		animation.play("attack_left")
 		sprites.scale.x = 1
 	attack_cooldown_timer.set_wait_time(animation.current_animation_length)
 	attack_cooldown_timer.start()
@@ -80,9 +77,22 @@ func attack1():
 func attack2():
 	ATTACKING = true
 	ATTACK_COOLDOWN = true
+	SPEED = 0
 	var laser : Laser = laser_beam.instantiate()
-	laser.SPAWN_POS = position
+	
+	var target_pos = (camera.get_global_mouse_position() - position).normalized()
+	if target_pos.x >= 0:
+		animation.play("laser_attack")
+		sprites.scale.x = -1
+		laser.position = position + Vector2(40,0)
+	else:
+		animation.play("laser_attack")
+		sprites.scale.x = 1
+		laser.position = position + Vector2(-40,0)
+	
+	laser.ATTACK_DIR = target_pos
 	get_parent().add_child(laser)
+	
 	attack_cooldown_timer.set_wait_time(animation.current_animation_length)
 	attack_cooldown_timer.start()
 
