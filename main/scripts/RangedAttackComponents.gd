@@ -1,11 +1,7 @@
-class_name AreaAttackComponent
+class_name RangedAttackComponent
 extends GenericAttackCompnent
 
-@onready var area := $Area as CollisionShape2D
-
-func enable_explosion():
-	area.set_disabled(false)
-	
+var ATTACK_DIR : Vector2 = Vector2.ZERO
 
 func _on_area_entered(area):
 	if area is HitboxComponent:

@@ -3,6 +3,8 @@ extends BaseEnemy
 
 var BASE_SPEED : float = 2500.0
 
+@onready var attack_component := $AttackComponent as EnemyAttackComponent
+
 func _init():
 	SPEED = BASE_SPEED
 
