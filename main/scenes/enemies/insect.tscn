@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://daqilkcj4va0q" path="res://main/scenes/generic/DetectionComponent.tscn" id="3_mas4k"]
 [ext_resource type="PackedScene" uid="uid://07bodgbfi3i8" path="res://main/scenes/generic/HitboxComponent.tscn" id="3_ocqfk"]
 [ext_resource type="PackedScene" uid="uid://bdre7ohepr58m" path="res://main/scenes/generic/HealthComponent.tscn" id="4_8qe7c"]
-[ext_resource type="PackedScene" uid="uid://ttcr6hqr3f3f" path="res://main/scenes/enemies/EnemyAttackComponent.tscn" id="7_di5l3"]
+[ext_resource type="PackedScene" uid="uid://ttcr6hqr3f3f" path="res://main/scenes/generic/EnemyAttackComponent.tscn" id="6_auonp"]
 [ext_resource type="Script" path="res://main/scripts/AttackRangeComponent.gd" id="7_seqgh"]
 [ext_resource type="PackedScene" uid="uid://cct5qbakh68td" path="res://main/scenes/generic/HealthBar.tscn" id="8_2mymm"]
 
@@ -304,14 +304,14 @@ radius = 14.0357
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hbpfg"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1rpvu"]
-radius = 151.053
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_pd2kd"]
 radius = 24.1868
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_le8g0"]
 radius = 24.0832
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1rpvu"]
+radius = 258.498
 
 [node name="Insect" type="CharacterBody2D"]
 collision_layer = 4
@@ -342,14 +342,6 @@ HEALT_COMPONENT = NodePath("../HealthComponent")
 shape = SubResource("CircleShape2D_hbpfg")
 debug_color = Color(0.92549, 0.196078, 0.482353, 0.419608)
 
-[node name="DetectionArea" parent="." instance=ExtResource("3_mas4k")]
-visible = false
-
-[node name="Vision" type="CollisionShape2D" parent="DetectionArea"]
-position = Vector2(1.55, 0)
-shape = SubResource("CircleShape2D_1rpvu")
-debug_color = Color(0.454902, 0.588235, 0.215686, 0.419608)
-
 [node name="AttackRangeComponent" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
@@ -359,7 +351,7 @@ script = ExtResource("7_seqgh")
 shape = SubResource("CircleShape2D_pd2kd")
 debug_color = Color(0.2, 0.619608, 0.482353, 0.419608)
 
-[node name="AttackComponent" parent="." instance=ExtResource("7_di5l3")]
+[node name="AttackComponent" parent="." instance=ExtResource("6_auonp")]
 visible = false
 position = Vector2(-30, 0)
 collision_mask = 32
@@ -385,6 +377,14 @@ offset_left = -22.0
 offset_top = -31.0
 offset_right = 23.0
 offset_bottom = -27.0
+
+[node name="DetectionArea" parent="." instance=ExtResource("3_mas4k")]
+
+[node name="Vision" type="CollisionShape2D" parent="DetectionArea"]
+visible = false
+position = Vector2(1.55, 0)
+shape = SubResource("CircleShape2D_1rpvu")
+debug_color = Color(0.454902, 0.588235, 0.215686, 0.419608)
 
 [connection signal="animation_finished" from="Player" to="." method="_on_player_animation_finished"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

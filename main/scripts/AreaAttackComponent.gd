@@ -9,5 +9,5 @@ func enable_explosion():
 
 func _on_area_entered(area):
 	if area is HitboxComponent:
-		var knockback = get_knockback(area)
+		var knockback = -get_knockback(area)
 		area.on_hit(DAMAGE, knockback, DURATION)

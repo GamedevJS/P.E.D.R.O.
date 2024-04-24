@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://jpjjmx14tcyf"]
+[gd_scene load_steps=6 format=3 uid="uid://jpjjmx14tcyf"]
 
 [ext_resource type="Texture2D" uid="uid://cp46rbburtwx7" path="res://assets/floor/chao1.png" id="1_bge48"]
 [ext_resource type="PackedScene" uid="uid://c2ppriesvmdgu" path="res://main/scenes/player/player.tscn" id="2_7bv5i"]
+[ext_resource type="PackedScene" uid="uid://cpn6b2cqtc80n" path="res://main/scenes/EnemySpawner.tscn" id="3_abcg8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pfh2d"]
 texture = ExtResource("1_bge48")
@@ -182,3 +183,5 @@ layer_1/tile_data = PackedInt32Array(-458766, 131072, 1, 458747, 131072, 1, 6553
 
 [node name="player" parent="." instance=ExtResource("2_7bv5i")]
 scale = Vector2(1.4, 1.4)
+
+[node name="EnemySpawner" parent="." instance=ExtResource("3_abcg8")]
