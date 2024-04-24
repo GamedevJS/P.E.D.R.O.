@@ -40,7 +40,6 @@ func attack():
 		sprites.scale.x = -1
 		spit.position = position + Vector2(15,0)
 	else:
-		animation.play("laser_attack")
 		sprites.scale.x = 1
 		spit.position = position + Vector2(-15,0)
 	
@@ -58,5 +57,4 @@ func _on_invincibility_timer_timeout():
 
 
 func _on_attack_cooldown_timeout():
-	print("cooldown")
 	ATTACK_COOLDOWN = false
