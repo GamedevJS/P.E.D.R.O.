@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cp46rbburtwx7"
-path="res://.godot/imported/chao1.png-a35d7d1489c7ec110c462c7878133575.ctex"
+uid="uid://4jrm2ud7lgcs"
+path="res://.godot/imported/parafuso1.png-1c552f805eba2682a6ddfaf648d15bb2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/floor/chao1.png"
-dest_files=["res://.godot/imported/chao1.png-a35d7d1489c7ec110c462c7878133575.ctex"]
+source_file="res://assets/colectables/parafuso1.png"
+dest_files=["res://.godot/imported/parafuso1.png-1c552f805eba2682a6ddfaf648d15bb2.ctex"]
 
 [params]
 

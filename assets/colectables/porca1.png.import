@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cp46rbburtwx7"
-path="res://.godot/imported/chao1.png-a35d7d1489c7ec110c462c7878133575.ctex"
+uid="uid://doc0rykka7sdt"
+path="res://.godot/imported/porca1.png-bf5a3ccf1b538a79cfc4ecb1c7da082b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/floor/chao1.png"
-dest_files=["res://.godot/imported/chao1.png-a35d7d1489c7ec110c462c7878133575.ctex"]
+source_file="res://assets/colectables/porca1.png"
+dest_files=["res://.godot/imported/porca1.png-bf5a3ccf1b538a79cfc4ecb1c7da082b.ctex"]
 
 [params]
 
