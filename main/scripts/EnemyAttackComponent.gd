@@ -7,7 +7,7 @@ extends Area2D
 
 @onready var CREATURE : BaseCreature = get_parent()
 
-var TARGET : HitboxComponent
+var TARGET : HitboxComponent = null
 
 func _process(delta):
 	if CREATURE.ATTACKING and !CREATURE.ATTACK_COOLDOWN:
@@ -15,6 +15,7 @@ func _process(delta):
 		
 		
 func attack():
+	print(TARGET)
 	if TARGET != null:		
 		var parent = get_parent()
 		var attack_dir : Vector2 = (parent.DIR - parent.PLAYER.DIR).normalized()
