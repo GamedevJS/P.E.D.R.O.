@@ -19,4 +19,4 @@ func movment_handler(delta):
 	else:
 		velocity = Vector2.ZERO
 	if INVINCILITY:
-		velocity -= KNOCKBACK
+		velocity += KNOCKBACK

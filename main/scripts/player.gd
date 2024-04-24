@@ -39,7 +39,7 @@ func movment_handler(delta):
 		velocity = DIR * SPEED * delta
 		
 		if INVINCILITY:
-			velocity += KNOCKBACK
+			velocity -= KNOCKBACK
 
 func animation_handler():
 	

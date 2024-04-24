@@ -15,7 +15,7 @@ func _on_area_entered(area):
 		var target : HitboxComponent = area
 		PLAYER.ATTACKING = true
 		
-		var attack_dir : Vector2 = (parent.DIR - PLAYER.DIR).normalized()
+		var attack_dir : Vector2 = (PLAYER.DIR - parent.DIR).normalized()
 		var knockback = attack_dir * KNOCK_BACK_FORCE
 		
 		target.on_hit(DAMAGE, knockback, DURATION)

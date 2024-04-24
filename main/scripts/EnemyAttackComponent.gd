@@ -13,7 +13,7 @@ func _process(delta):
 func attack():
 	if TARGET != null:		
 		var parent = get_parent()
-		var attack_dir : Vector2 = (parent.DIR - parent.PLAYER.DIR).normalized()
+		var attack_dir : Vector2 = (parent.PLAYER.DIR - parent.DIR).normalized()
 		var knockback = attack_dir * KNOCK_BACK_FORCE
 		TARGET.on_hit(DAMAGE, knockback, DURATION)
 		CREATURE.ATTACK_COOLDOWN = true

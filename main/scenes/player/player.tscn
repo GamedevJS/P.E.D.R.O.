@@ -365,13 +365,13 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g3a05"]
 radius = 6.0
-height = 58.0
+height = 60.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g1w8r"]
 radius = 5.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ggkec"]
-radius = 7.0
+radius = 5.0
 height = 30.0
 
 [node name="player" type="CharacterBody2D"]
@@ -411,7 +411,6 @@ vframes = 4
 wait_time = 0.5
 
 [node name="Hitbox" parent="." node_paths=PackedStringArray("HEALT_COMPONENT") instance=ExtResource("9_61iej")]
-visible = false
 HEALT_COMPONENT = NodePath("../HealthComponent")
 
 [node name="collision" type="CollisionShape2D" parent="Hitbox"]
@@ -439,7 +438,6 @@ KNOCK_BACK_FORCE = 120.0
 DURATION = 0.5
 
 [node name="body" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(1, 16)
 rotation = 3.14159
 shape = SubResource("CapsuleShape2D_ggkec")
