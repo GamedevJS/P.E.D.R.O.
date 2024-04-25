@@ -2,6 +2,11 @@ class_name Player
 extends BaseCreature
 
 signal item_collected(collectable: Collectable)
+signal player_died(staus: PlayerStatus)
+
+class PlayerStatus:
+	var points : int
+	var position : Vector2
 
 var BASE_SPEED : float = 5000.0
 var LASER_COOLDOWN : bool = false
@@ -148,7 +153,10 @@ func _on_attack_cooldown_timeout():
 	ATTACK_COOLDOWN = false
 
 
-
-func _on_hitbox_body_entered(body):
-	if body is Collectable:
-		item_collected.emit(body)
+func  on_death():
+	var status : PlayerStatus = PlayerStatus.new()
+	status.position = position
+	player_died.emit(status)
+	queue_free()
+	
+	

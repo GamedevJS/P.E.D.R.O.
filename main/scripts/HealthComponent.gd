@@ -15,3 +15,10 @@ func handle_damage(damage: float):
 	damage_recieved.emit()
 	if HEALTH <= 0:
 		get_parent().on_death()
+
+
+func handle_heal(heal: float):
+	HEALTH += heal
+	damage_recieved.emit()
+	if HEALTH >= MAX_HEALTH:
+		HEALTH = MAX_HEALTH

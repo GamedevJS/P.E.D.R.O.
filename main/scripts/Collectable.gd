@@ -7,6 +7,8 @@ extends StaticBody2D
 
 @export var points : int = 0
 @export var type : int = 0
+@export var heal : int = 0
+
 
 func _process(delta):
 	if type == 0:
