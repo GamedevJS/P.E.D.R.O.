@@ -21,7 +21,8 @@ func _on_timer_timeout():
 					var enemy_src = load(str(spawner.enemy.resource_path))
 					var count = 0
 					while count < spawner.enemy_num:
-						var enemy = enemy_src.instantiate()
+						var enemy : BaseEnemy = enemy_src.instantiate()
+						enemy.set_player(PLAYER)
 						enemy.global_position = get_spawn_position()
 						get_parent().add_child(enemy)
 						count += 1

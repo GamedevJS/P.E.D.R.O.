@@ -2,8 +2,7 @@ class_name BaseEnemy
 extends BaseCreature
 
 
-var CHASE = false
-var PLAYER : CharacterBody2D = null
+@onready var PLAYER : CharacterBody2D
 
 
 @onready var animation := $Player as AnimationPlayer
@@ -14,7 +13,7 @@ var PLAYER : CharacterBody2D = null
 @onready var item = load("res://main/scenes/itens/Collectable.tscn")
 
 func movment_handler(delta):
-	if CHASE and !ATTACKING:
+	if !ATTACKING:
 		DIR = (PLAYER.position - position).normalized()
 		velocity = (DIR * SPEED * delta)
 	else:
@@ -38,3 +37,6 @@ func on_death() -> void:
 	get_parent().get_parent().add_child(item_drop)
 	queue_free()
 	
+
+func set_player(player: Player):
+	PLAYER = player
