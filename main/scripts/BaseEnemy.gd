@@ -13,7 +13,7 @@ extends BaseCreature
 @onready var item = load("res://main/scenes/itens/Collectable.tscn")
 
 func movment_handler(delta):
-	if !ATTACKING:
+	if !ATTACKING and PLAYER != null:
 		DIR = (PLAYER.position - position).normalized()
 		velocity = (DIR * SPEED * delta)
 	else:

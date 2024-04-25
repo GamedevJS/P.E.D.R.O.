@@ -585,7 +585,6 @@ vframes = 4
 wait_time = 0.5
 
 [node name="Hitbox" parent="." node_paths=PackedStringArray("HEALT_COMPONENT") instance=ExtResource("9_61iej")]
-visible = false
 collision_mask = 8
 HEALT_COMPONENT = NodePath("../HealthComponent")
 
@@ -611,12 +610,12 @@ wait_time = 0.8
 wait_time = 3.0
 
 [node name="body" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(1, 16)
 rotation = 3.14159
 shape = SubResource("CapsuleShape2D_ggkec")
 
 [node name="Attack" parent="." instance=ExtResource("11_f5auv")]
+visible = false
 position = Vector2(9, 19)
 rotation = 2.0944
 KNOCK_BACK_FORCE = 120.0

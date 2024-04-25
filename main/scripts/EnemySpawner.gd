@@ -32,12 +32,12 @@ func get_spawn_position():
 	var vpr : Vector2 = get_viewport_rect().size * randf_range(1, 1.2)
 	var rand_pos = randi_range(1,4)
 	if rand_pos == 1:
-		return Vector2(PLAYER.global_position.x - vpr.x/2, PLAYER.global_position.y - vpr.y/2)
+		return Vector2(PLAYER.global_position.x - vpr.x/4, PLAYER.global_position.y - vpr.y/4)
 	elif rand_pos == 2:
-		return Vector2(PLAYER.global_position.x + vpr.x/2, PLAYER.global_position.y - vpr.y/2)
+		return Vector2(PLAYER.global_position.x + vpr.x/4, PLAYER.global_position.y - vpr.y/4)
 	elif rand_pos == 3:
-		return Vector2(PLAYER.global_position.x - vpr.x/2, PLAYER.global_position.y + vpr.y/2)
+		return Vector2(PLAYER.global_position.x - vpr.x/4, PLAYER.global_position.y + vpr.y/4)
 	elif rand_pos == 4:
-		return Vector2(PLAYER.global_position.x + vpr.x/2, PLAYER.global_position.y + vpr.y/2)
+		return Vector2(PLAYER.global_position.x + vpr.x/4, PLAYER.global_position.y + vpr.y/4)
 	return Vector2.ZERO
 	
