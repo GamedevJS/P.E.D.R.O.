@@ -10,6 +10,7 @@ class PlayerStatus:
 
 var BASE_SPEED : float = 5000.0
 var LASER_COOLDOWN : bool = false
+var LASER_HOLDER : Laser = null
 
 var SEN_45 = pow(2, 1/2)/2
 
@@ -24,6 +25,7 @@ var SEN_45 = pow(2, 1/2)/2
 
 
 @onready var laser_beam = load("res://main/scenes/projectiles/Laser.tscn")
+
 
 func _ready():
 	SPEED = BASE_SPEED
@@ -50,7 +52,7 @@ func movment_handler(delta):
 
 
 func animation_handler():	
-	if !ATTACKING:
+	if !ATTACKING and IS_ALIVE:
 		if DIR.x != 0:
 			sprites.scale.x = -DIR.x
 		if DIR != Vector2.ZERO:
@@ -111,9 +113,7 @@ func attack2():
 			laser.position = position + Vector2(-40,0)
 	
 	laser.ATTACK_DIR = _pos
-	get_parent().add_child(laser)
-	health.handle_damage(laser.get_damage_2_self())
-	
+	LASER_HOLDER = laser
 	laser_cooldown_timer.start()
 
 
@@ -129,6 +129,14 @@ func get_attack_direction():
 		return 4 # DOWN
 	return 0
 
+
+func  on_death():
+	var status : PlayerStatus = PlayerStatus.new()
+	status.position = position
+	player_died.emit(status)
+	IS_ALIVE = false
+	animation.play("death")
+	$Hitbox.monitorable = false
 	
 # Signals
 
@@ -136,6 +144,12 @@ func _on_animation_player_animation_finished(anim_name):
 	if anim_name.contains("attack"):
 		ATTACKING = false
 		attack.disable_attack()
+		SPEED = BASE_SPEED
+		if anim_name.contains("laser"):
+			get_parent().add_child(LASER_HOLDER)
+			health.handle_damage(LASER_HOLDER.get_damage_2_self())
+	elif anim_name == "death":
+		animation.play("dead")
 
 
 func _on_hit_cooldown_timeout():
@@ -150,20 +164,11 @@ func _on_hitbox_damage_recieved():
 
 
 func _on_attack_cooldown_timeout():
-	SPEED = BASE_SPEED
 	ATTACK_COOLDOWN = false
 
 
 func _on_laser_cooldown_timeout():
 	LASER_COOLDOWN = false
-	SPEED = BASE_SPEED
-
-
-func  on_death():
-	var status : PlayerStatus = PlayerStatus.new()
-	status.position = position
-	player_died.emit(status)
-	queue_free()
 	
 
 func _on_health_timeout_timeout():

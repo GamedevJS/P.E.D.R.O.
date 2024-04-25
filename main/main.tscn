@@ -10,14 +10,13 @@ script = ExtResource("1_3kbn8")
 player = NodePath("player")
 ui = NodePath("UI")
 
-[node name="TileMap" parent="." instance=ExtResource("1_x6lmk")]
+[node name="Map" parent="." instance=ExtResource("1_x6lmk")]
 
 [node name="player" parent="." instance=ExtResource("2_d5v22")]
 scale = Vector2(1.4, 1.4)
 
 [node name="Camera" type="Camera2D" parent="player"]
 position = Vector2(-1.78814e-06, -2.86102e-06)
-scale = Vector2(1, 1)
 zoom = Vector2(2, 2)
 limit_smoothed = true
 position_smoothing_enabled = true
@@ -35,7 +34,6 @@ editor_draw_drag_margin = true
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(-1.78814e-06, -2.86102e-06)
-scale = Vector2(1, 1)
 zoom = Vector2(2, 2)
 limit_smoothed = true
 position_smoothing_enabled = true

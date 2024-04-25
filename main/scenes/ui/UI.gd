@@ -33,7 +33,7 @@ func _update_score():
 func handle_player_death_ui(status: Player.PlayerStatus):
 	game_layout.set_visible(false)
 	death_layout.set_visible(true)
-	
+
 	death_label.push_font(font, 30)
 	death_label.append_text("YOU WERE DESTROYED")
 	death_label.newline()

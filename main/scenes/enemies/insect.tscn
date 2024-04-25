@@ -319,6 +319,7 @@ shape = SubResource("CircleShape2D_jc0g6")
 MAX_HEALTH = 70.0
 
 [node name="AttackRangeComponent" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 script = ExtResource("7_seqgh")
 
@@ -327,6 +328,7 @@ shape = SubResource("CircleShape2D_pd2kd")
 debug_color = Color(0.2, 0.619608, 0.482353, 0.419608)
 
 [node name="AttackComponent" parent="." instance=ExtResource("6_auonp")]
+visible = false
 position = Vector2(-30, 0)
 collision_mask = 32
 DAMAGE = 5.0
@@ -353,6 +355,7 @@ offset_bottom = -25.0
 parent = NodePath("..")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("HEALT_COMPONENT") instance=ExtResource("3_ocqfk")]
+visible = false
 HEALT_COMPONENT = NodePath("../HealthComponent")
 
 [node name="collision" type="CollisionShape2D" parent="HitboxComponent"]

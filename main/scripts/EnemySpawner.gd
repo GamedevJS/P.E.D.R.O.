@@ -2,6 +2,7 @@ class_name EnemySpawner
 extends Node2D
 
 @export var SPAWNS : Array[SpawnInfo] = []
+@export var ENABLED : bool = true
 
 @onready var PLAYER = get_parent().get_parent().get_node("player")
 
@@ -9,7 +10,7 @@ var time = 0
 
 
 func _on_timer_timeout():
-	if PLAYER != null:
+	if PLAYER != null and ENABLED:
 		time += 1
 		var enemy_spawns : Array[SpawnInfo] = SPAWNS
 		for spawner in enemy_spawns:
@@ -41,3 +42,6 @@ func get_spawn_position():
 		return Vector2(PLAYER.global_position.x + vpr.x/4, PLAYER.global_position.y + vpr.y/4)
 	return Vector2.ZERO
 	
+	
+func disable():
+	ENABLED = false

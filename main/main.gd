@@ -2,6 +2,8 @@ class_name Main
 extends Node2D
 
 
+@onready var spawner : EnemySpawner = get_node("Map/EnemySpawner")
+	
 @export var player : Player
 @export var ui : UI
 
@@ -21,6 +23,6 @@ func handle_player_death(status: Player.PlayerStatus):
 	var camera : Camera2D = $Camera
 	camera.position = status.position
 	camera.make_current()
-	
+	spawner.disable()
 	
 	
