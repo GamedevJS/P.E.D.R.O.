@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bigj1gc0m3cm1"]
+[gd_scene load_steps=5 format=3 uid="uid://bigj1gc0m3cm1"]
 
 [ext_resource type="Script" path="res://main/main.gd" id="1_3kbn8"]
 [ext_resource type="PackedScene" uid="uid://jpjjmx14tcyf" path="res://main/scenes/maps/map1.tscn" id="1_x6lmk"]
 [ext_resource type="PackedScene" uid="uid://c2ppriesvmdgu" path="res://main/scenes/player/player.tscn" id="2_d5v22"]
 [ext_resource type="PackedScene" uid="uid://bw14v8vfidyg5" path="res://main/scenes/ui/UI.tscn" id="4_bnedr"]
-[ext_resource type="PackedScene" uid="uid://bucg0h2jop5re" path="res://main/scenes/itens/Collectable.tscn" id="5_c3nvm"]
 
 [node name="main" type="Node2D" node_paths=PackedStringArray("player", "ui")]
 script = ExtResource("1_3kbn8")
@@ -33,6 +32,3 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="UI" parent="." instance=ExtResource("4_bnedr")]
-
-[node name="Collectable" parent="." instance=ExtResource("5_c3nvm")]
-position = Vector2(91, 27)

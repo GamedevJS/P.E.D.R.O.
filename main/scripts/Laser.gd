@@ -30,11 +30,11 @@ func detonate():
 	area.enable_explosion()
 	sprites.set_visible(true)
 	EXPLODE = true
-	animation.play("finish")
+	animation.play("explode")
 
 
 func _on_animation_player_animation_finished(anim_name):
-	if anim_name == "finish":
+	if anim_name == "explode":
 		queue_free()
 
 

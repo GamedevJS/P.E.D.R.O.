@@ -359,11 +359,12 @@ hframes = 2
 [node name="InvincibilityTimer" type="Timer" parent="."]
 wait_time = 0.3
 
-[node name="HealthBar" parent="." instance=ExtResource("8_2mymm")]
+[node name="HealthBar" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("8_2mymm")]
 offset_left = -22.0
 offset_top = -27.0
 offset_right = 18.0
 offset_bottom = -25.0
+parent = NodePath("..")
 
 [node name="DetectionArea" parent="." instance=ExtResource("3_mas4k")]
 

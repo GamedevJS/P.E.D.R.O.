@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cn60m4i5esbwx" path="res://assets/robo/robo.png" id="2_q2hyh"]
 [ext_resource type="PackedScene" uid="uid://bdre7ohepr58m" path="res://main/scenes/generic/HealthComponent.tscn" id="2_ufvpn"]
 [ext_resource type="PackedScene" uid="uid://07bodgbfi3i8" path="res://main/scenes/generic/HitboxComponent.tscn" id="9_61iej"]
-[ext_resource type="PackedScene" uid="uid://dwy6tdfqcmc6s" path="res://main/scenes/player/PlayerAttackComponent.tscn" id="11_f5auv"]
+[ext_resource type="PackedScene" path="res://main/scenes/player/PlayerAttackComponent.tscn" id="11_f5auv"]
 
 [sub_resource type="Animation" id="Animation_kba2t"]
 length = 0.001
