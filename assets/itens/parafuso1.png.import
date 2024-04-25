@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtbpqle4hr5ti"
-path="res://.godot/imported/idle.png-600a6709c1a21ab5f528af7b11a02560.ctex"
+uid="uid://bxbrjil737bfw"
+path="res://.godot/imported/parafuso1.png-4860cc392ad7094bd62e24f6110a9137.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/idle.png"
-dest_files=["res://.godot/imported/idle.png-600a6709c1a21ab5f528af7b11a02560.ctex"]
+source_file="res://assets/itens/parafuso1.png"
+dest_files=["res://.godot/imported/parafuso1.png-4860cc392ad7094bd62e24f6110a9137.ctex"]
 
 [params]
 
