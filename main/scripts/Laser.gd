@@ -22,9 +22,9 @@ func _physics_process(delta):
 		move_and_slide()
 
 
-func _on_detonator_timeout():
-	detonate()
-	
+func get_damage_2_self():
+	return area.DAMAGE_SELF
+
 	
 func detonate():
 	area.enable_explosion()
@@ -32,6 +32,10 @@ func detonate():
 	EXPLODE = true
 	animation.play("explode")
 
+
+func _on_detonator_timeout():
+	detonate()
+	
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "explode":

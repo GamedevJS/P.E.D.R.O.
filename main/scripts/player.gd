@@ -20,6 +20,8 @@ var SEN_45 = pow(2, 1/2)/2
 @onready var laser_cooldown_timer := $LaserCooldown as Timer
 @onready var attack := $Attack as PlayerAttackComponent
 @onready var camera := $Camera as Camera2D
+@onready var health := $HealthComponent as HealthComponent
+
 
 @onready var laser_beam = load("res://main/scenes/projectiles/Laser.tscn")
 
@@ -35,7 +37,6 @@ func _physics_process(delta):
 func _process(delta):
 	animation_handler()	
 		
-
 
 func movment_handler(delta):
 		DIR = Vector2(
@@ -61,7 +62,7 @@ func animation_handler():
 func attack_handler():	
 	if Input.is_action_just_pressed("attack1") and !ATTACK_COOLDOWN:
 		attack1()
-	if Input.is_action_just_pressed("attack2") and !ATTACK_COOLDOWN:
+	if Input.is_action_just_pressed("attack2") and !LASER_COOLDOWN:
 		attack2()
 		
 
@@ -89,7 +90,7 @@ func attack1():
 
 func attack2():
 	ATTACKING = true
-	ATTACK_COOLDOWN = true
+	LASER_COOLDOWN = true
 	SPEED = 0
 	var laser : Laser = laser_beam.instantiate()
 	
@@ -111,9 +112,9 @@ func attack2():
 	
 	laser.ATTACK_DIR = _pos
 	get_parent().add_child(laser)
+	health.handle_damage(laser.get_damage_2_self())
 	
-	attack_cooldown_timer.set_wait_time(animation.current_animation_length)
-	attack_cooldown_timer.start()
+	laser_cooldown_timer.start()
 
 
 func get_attack_direction():
@@ -153,10 +154,17 @@ func _on_attack_cooldown_timeout():
 	ATTACK_COOLDOWN = false
 
 
+func _on_laser_cooldown_timeout():
+	LASER_COOLDOWN = false
+	SPEED = BASE_SPEED
+
+
 func  on_death():
 	var status : PlayerStatus = PlayerStatus.new()
 	status.position = position
 	player_died.emit(status)
 	queue_free()
 	
-	
+
+func _on_health_timeout_timeout():
+	health.handle_damage(1)

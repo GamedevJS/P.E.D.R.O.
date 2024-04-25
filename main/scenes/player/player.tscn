@@ -601,7 +601,7 @@ debug_color = Color(0.937255, 0.203922, 0.360784, 0.419608)
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_ufvpn")]
 visible = false
-MAX_HEALTH = 20.0
+MAX_HEALTH = 200.0
 
 [node name="AttackCooldown" type="Timer" parent="."]
 wait_time = 0.8
@@ -621,9 +621,14 @@ rotation = 2.0944
 KNOCK_BACK_FORCE = 120.0
 DURATION = 0.5
 
+[node name="HealthTimeout" type="Timer" parent="."]
+autostart = true
+
 [connection signal="animation_finished" from="Player" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="HitCooldown" to="." method="_on_hit_cooldown_timeout"]
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="Hitbox" to="Hitbox" method="_on_hitbox_body_entered"]
 [connection signal="damage_recieved" from="Hitbox" to="." method="_on_hitbox_damage_recieved"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
+[connection signal="timeout" from="LaserCooldown" to="." method="_on_laser_cooldown_timeout"]
+[connection signal="timeout" from="HealthTimeout" to="." method="_on_health_timeout_timeout"]
