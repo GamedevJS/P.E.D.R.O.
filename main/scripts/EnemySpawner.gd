@@ -3,26 +3,28 @@ extends Node2D
 
 @export var SPAWNS : Array[SpawnInfo] = []
 
-@onready var PLAYER = get_parent().get_node("player")
+@onready var PLAYER = get_parent().get_parent().get_node("player")
 
 var time = 0
 
+
 func _on_timer_timeout():
-	time += 1
-	var enemy_spawns : Array[SpawnInfo] = SPAWNS
-	for spawner in enemy_spawns:
-		if (time >= spawner.time_start) and (time <= spawner.time_end):
-			if spawner.spawn_delay_counter < spawner.enemy_spawn_delay:
-				spawner.spawn_delay_counter += 1
-			else:
-				spawner.spawn_delay_counter = 0
-				var enemy_src = load(str(spawner.enemy.resource_path))
-				var count = 0
-				while count < spawner.enemy_num:
-					var enemy = enemy_src.instantiate()
-					enemy.global_position = get_spawn_position()
-					get_parent().add_child(enemy)
-					count += 1
+	if PLAYER != null:
+		time += 1
+		var enemy_spawns : Array[SpawnInfo] = SPAWNS
+		for spawner in enemy_spawns:
+			if (time >= spawner.time_start) and (time <= spawner.time_end):
+				if spawner.spawn_delay_counter < spawner.enemy_spawn_delay:
+					spawner.spawn_delay_counter += 1
+				else:
+					spawner.spawn_delay_counter = 0
+					var enemy_src = load(str(spawner.enemy.resource_path))
+					var count = 0
+					while count < spawner.enemy_num:
+						var enemy = enemy_src.instantiate()
+						enemy.global_position = get_spawn_position()
+						get_parent().add_child(enemy)
+						count += 1
 
 
 func get_spawn_position():
@@ -37,7 +39,4 @@ func get_spawn_position():
 	elif rand_pos == 1:
 		return Vector2(PLAYER.global_position.x + vpr.x/2, PLAYER.global_position.y + vpr.y/2)
 	return Vector2.ZERO
-	
-	
-	
 	

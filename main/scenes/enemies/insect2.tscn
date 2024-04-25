@@ -251,10 +251,10 @@ MAX_HEALTH = 45.0
 wait_time = 0.3
 
 [node name="HealthBar" parent="." instance=ExtResource("8_2mymm")]
-offset_left = -24.0
-offset_top = -32.0
-offset_right = 21.0
-offset_bottom = -28.0
+offset_left = -22.0
+offset_top = -30.0
+offset_right = 24.0
+offset_bottom = -27.0
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("HEALT_COMPONENT") instance=ExtResource("3_ocqfk")]
 visible = false

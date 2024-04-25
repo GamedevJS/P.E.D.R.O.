@@ -380,20 +380,6 @@ position = Vector2(1, -9)
 collision_mask = 38
 script = ExtResource("1_qm2sx")
 
-[node name="Camera" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
-limit_smoothed = true
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 0.01
-drag_top_margin = 0.01
-drag_right_margin = 0.01
-drag_bottom_margin = 0.01
-editor_draw_limits = true
-editor_draw_drag_margin = true
-
 [node name="Player" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_aypkg")
@@ -411,6 +397,7 @@ wait_time = 0.5
 
 [node name="Hitbox" parent="." node_paths=PackedStringArray("HEALT_COMPONENT") instance=ExtResource("9_61iej")]
 visible = false
+collision_mask = 8
 HEALT_COMPONENT = NodePath("../HealthComponent")
 
 [node name="collision" type="CollisionShape2D" parent="Hitbox"]
@@ -446,5 +433,7 @@ shape = SubResource("CapsuleShape2D_ggkec")
 
 [connection signal="animation_finished" from="Player" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="HitCooldown" to="." method="_on_hit_cooldown_timeout"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="damage_recieved" from="Hitbox" to="." method="_on_hitbox_damage_recieved"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

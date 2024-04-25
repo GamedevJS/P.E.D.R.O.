@@ -1,6 +1,7 @@
 class_name Player
 extends BaseCreature
 
+signal item_collected(collectable: Collectable)
 
 var BASE_SPEED : float = 5000.0
 var LASER_COOLDOWN : bool = false
@@ -41,8 +42,7 @@ func movment_handler(delta):
 		if INVINCILITY:
 			velocity -= KNOCKBACK
 
-func animation_handler():
-	
+func animation_handler():	
 	if !ATTACKING:
 		if DIR.x != 0:
 			sprites.scale.x = -DIR.x
@@ -50,8 +50,7 @@ func animation_handler():
 		animation.play("walking")
 			
 
-func attack_handler():
-	
+func attack_handler():	
 	if Input.is_action_just_pressed("attack1") and !ATTACK_COOLDOWN:
 		attack1()
 	if Input.is_action_just_pressed("attack2") and !ATTACK_COOLDOWN:
@@ -116,8 +115,8 @@ func _on_animation_player_animation_finished(anim_name):
 	if anim_name.contains("attack"):
 		ATTACKING = false
 		attack.disable_attack()
-		
-		
+
+
 func _on_hit_cooldown_timeout():
 	INVINCILITY = false
 	sprites.set_modulate(Color(1,1, 1, 1))
@@ -129,7 +128,12 @@ func _on_hitbox_damage_recieved():
 	sprites.set_modulate(Color(218,104, 97, 1))
 
 
-
 func _on_attack_cooldown_timeout():
 	SPEED = BASE_SPEED
 	ATTACK_COOLDOWN = false
+
+
+
+func _on_hitbox_body_entered(body):
+	if body is Collectable:
+		item_collected.emit(body)

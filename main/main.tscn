@@ -1,7 +1,38 @@
-[gd_scene load_steps=2 format=3 uid="uid://bigj1gc0m3cm1"]
+[gd_scene load_steps=6 format=3 uid="uid://bigj1gc0m3cm1"]
 
+[ext_resource type="Script" path="res://main/main.gd" id="1_3kbn8"]
 [ext_resource type="PackedScene" uid="uid://jpjjmx14tcyf" path="res://main/scenes/maps/map1.tscn" id="1_x6lmk"]
+[ext_resource type="PackedScene" uid="uid://c2ppriesvmdgu" path="res://main/scenes/player/player.tscn" id="2_d5v22"]
+[ext_resource type="PackedScene" uid="uid://bw14v8vfidyg5" path="res://main/scenes/ui/UI.tscn" id="4_bnedr"]
+[ext_resource type="PackedScene" uid="uid://bucg0h2jop5re" path="res://main/scenes/itens/Collectable.tscn" id="5_c3nvm"]
 
-[node name="main" type="Node2D"]
+[node name="main" type="Node2D" node_paths=PackedStringArray("player", "ui")]
+script = ExtResource("1_3kbn8")
+player = NodePath("player")
+ui = NodePath("UI")
 
 [node name="TileMap" parent="." instance=ExtResource("1_x6lmk")]
+
+[node name="player" parent="." instance=ExtResource("2_d5v22")]
+scale = Vector2(1.4, 1.4)
+
+[node name="Camera" type="Camera2D" parent="player"]
+position = Vector2(-0.714287, 6.42857)
+scale = Vector2(0.714286, 0.714286)
+zoom = Vector2(2, 2)
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.01
+drag_top_margin = 0.01
+drag_right_margin = 0.01
+drag_bottom_margin = 0.01
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="UI" parent="." instance=ExtResource("4_bnedr")]
+
+[node name="Collectable" parent="." instance=ExtResource("5_c3nvm")]
+position = Vector2(91, 27)
