@@ -16,8 +16,8 @@ ui = NodePath("UI")
 scale = Vector2(1.4, 1.4)
 
 [node name="Camera" type="Camera2D" parent="player"]
-position = Vector2(-0.714287, 6.42857)
-scale = Vector2(0.714286, 0.714286)
+position = Vector2(-1.78814e-06, -2.86102e-06)
+scale = Vector2(1, 1)
 zoom = Vector2(2, 2)
 limit_smoothed = true
 position_smoothing_enabled = true
@@ -32,3 +32,19 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="UI" parent="." instance=ExtResource("4_bnedr")]
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(-1.78814e-06, -2.86102e-06)
+scale = Vector2(1, 1)
+zoom = Vector2(2, 2)
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.01
+drag_top_margin = 0.01
+drag_right_margin = 0.01
+drag_bottom_margin = 0.01
+editor_draw_limits = true
+editor_draw_drag_margin = true
