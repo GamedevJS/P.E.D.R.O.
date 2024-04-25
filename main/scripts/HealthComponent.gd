@@ -14,5 +14,4 @@ func handle_damage(damage: float):
 	HEALTH -= damage
 	damage_recieved.emit()
 	if HEALTH <= 0:
-		get_parent().queue_free()
-		print(get_parent().name + " just died")
+		get_parent().on_death()

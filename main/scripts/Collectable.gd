@@ -11,3 +11,5 @@ extends StaticBody2D
 func _process(delta):
 	if type == 0:
 		animation.play("parafuso")
+	if type == 1:
+		animation.play("porca")

@@ -47,6 +47,10 @@ func attack():
 	get_parent().add_child(spit)
 
 
+func get_points() -> int:
+	return 15
+
+
 func _on_hitbox_component_damage_recieved():
 	INVINCILITY = true
 	hit_cooldown.start()

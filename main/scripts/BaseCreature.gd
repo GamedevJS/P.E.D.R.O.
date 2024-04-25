@@ -8,3 +8,8 @@ var SPEED : float = 0
 var INVINCILITY : bool = false
 var ATTACKING : bool = false
 var ATTACK_COOLDOWN : bool = false
+
+
+func on_death():
+	get_parent().queue_free()
+	print(get_parent().name + " just died")

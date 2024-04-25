@@ -213,6 +213,7 @@ script = ExtResource("1_bgem7")
 points = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_wjq6q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -362,7 +362,7 @@ wait_time = 0.3
 [node name="HealthBar" parent="." instance=ExtResource("8_2mymm")]
 offset_left = -22.0
 offset_top = -27.0
-offset_right = 19.0
+offset_right = 18.0
 offset_bottom = -25.0
 
 [node name="DetectionArea" parent="." instance=ExtResource("3_mas4k")]
