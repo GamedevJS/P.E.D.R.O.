@@ -42,12 +42,15 @@ func movment_handler(delta):
 		if INVINCILITY:
 			velocity -= KNOCKBACK
 
+
 func animation_handler():	
 	if !ATTACKING:
 		if DIR.x != 0:
 			sprites.scale.x = -DIR.x
-		#if velocity != Vector2.ZERO:
-		animation.play("walking")
+		if DIR != Vector2.ZERO:
+			animation.play("walking_side")
+		else:
+			animation.play("idle")
 			
 
 func attack_handler():	
@@ -61,13 +64,19 @@ func attack1():
 	ATTACKING = true
 	SPEED = SPEED * 0.1
 	ATTACK_COOLDOWN = true
-	var _pos = camera.get_global_mouse_position().x - position.x
-	if _pos >= 0:
-		animation.play("attack_right")
+	var _pos = get_attack_direction()
+	if _pos == 1:
+		animation.play("attack_up")
 		sprites.scale.x = -1
-	else:
+	elif _pos == 2:
 		animation.play("attack_left")
 		sprites.scale.x = 1
+	elif _pos == 3:
+		animation.play("attack_right")
+		sprites.scale.x = -1
+	elif _pos == 4:
+		animation.play("attack_down")
+		sprites.scale.x = -1
 	attack_cooldown_timer.set_wait_time(animation.current_animation_length)
 	attack_cooldown_timer.start()
 	attack.enable_attack()
@@ -79,33 +88,39 @@ func attack2():
 	SPEED = 0
 	var laser : Laser = laser_beam.instantiate()
 	
-	var target_pos = (camera.get_global_mouse_position() - position).normalized()
-	if target_pos.x >= 0:
-		animation.play("laser_attack")
-		sprites.scale.x = -1
-		laser.position = position + Vector2(40,0)
-	else:
-		animation.play("laser_attack")
+	var angle = get_attack_direction()
+	var _pos = (camera.get_global_mouse_position() - position).normalized()
+	if angle == 4:
+		animation.play("laser_attack_down")
 		sprites.scale.x = 1
-		laser.position = position + Vector2(-40,0)
+		laser.position = position + Vector2(20,10)
+	else:
+		if _pos.x >= 0:
+			animation.play("laser_attack")
+			sprites.scale.x = -1
+			laser.position = position + Vector2(40,0)
+		else:
+			animation.play("laser_attack")
+			sprites.scale.x = 1
+			laser.position = position + Vector2(-40,0)
 	
-	laser.ATTACK_DIR = target_pos
+	laser.ATTACK_DIR = _pos
 	get_parent().add_child(laser)
 	
 	attack_cooldown_timer.set_wait_time(animation.current_animation_length)
 	attack_cooldown_timer.start()
 
 
-func handle_attack_direction():
-	var attack_dir = get_local_mouse_position() - position
+func get_attack_direction():
+	var attack_dir = camera.get_global_mouse_position() - position
 	if attack_dir.y < SEN_45 * attack_dir.x and attack_dir.y < -SEN_45 * attack_dir.x:
-		return 1
+		return 1 # UP
 	elif attack_dir.y >= SEN_45 * attack_dir.x and attack_dir.y < -SEN_45 * attack_dir.x:
-		return 2
+		return 2 # LEFT
 	elif attack_dir.y < SEN_45 * attack_dir.x and attack_dir.y >= -SEN_45 * attack_dir.x:
-		return 3
+		return 3 # RIGHT
 	elif attack_dir.y >= SEN_45 * attack_dir.x and attack_dir.y >= -SEN_45 * attack_dir.x:
-		return 4
+		return 4 # DOWN
 	return 0
 
 	
