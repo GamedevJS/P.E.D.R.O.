@@ -3,7 +3,6 @@ extends Resource
 
 
 @export var time_start : float = 0
-@export var time_end : float = 0
 
 @export var enemy : Resource
 @export var enemy_num : int

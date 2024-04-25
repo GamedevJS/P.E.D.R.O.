@@ -13,7 +13,7 @@ func _on_timer_timeout():
 		time += 1
 		var enemy_spawns : Array[SpawnInfo] = SPAWNS
 		for spawner in enemy_spawns:
-			if (time >= spawner.time_start) and (time <= spawner.time_end):
+			if (time >= spawner.time_start):
 				if spawner.spawn_delay_counter < spawner.enemy_spawn_delay:
 					spawner.spawn_delay_counter += 1
 				else:
@@ -28,15 +28,15 @@ func _on_timer_timeout():
 
 
 func get_spawn_position():
-	var vpr : Vector2 = get_viewport_rect().size * randf_range(0.8, 1.0)
+	var vpr : Vector2 = get_viewport_rect().size * randf_range(1, 1.2)
 	var rand_pos = randi_range(1,4)
 	if rand_pos == 1:
 		return Vector2(PLAYER.global_position.x - vpr.x/2, PLAYER.global_position.y - vpr.y/2)
-	elif rand_pos == 1:
+	elif rand_pos == 2:
 		return Vector2(PLAYER.global_position.x + vpr.x/2, PLAYER.global_position.y - vpr.y/2)
-	elif rand_pos == 1:
+	elif rand_pos == 3:
 		return Vector2(PLAYER.global_position.x - vpr.x/2, PLAYER.global_position.y + vpr.y/2)
-	elif rand_pos == 1:
+	elif rand_pos == 4:
 		return Vector2(PLAYER.global_position.x + vpr.x/2, PLAYER.global_position.y + vpr.y/2)
 	return Vector2.ZERO
 	
