@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bw14v8vfidyg5"]
+[gd_scene load_steps=2 format=3 uid="uid://bw14v8vfidyg5"]
 
 [ext_resource type="Script" path="res://main/scenes/ui/UI.gd" id="1_2rw1r"]
-[ext_resource type="PackedScene" uid="uid://d18oiwe0kfy4y" path="res://main/scenes/player/PlayerHealthBar.tscn" id="2_b56nr"]
 
 [node name="Control" type="CanvasLayer"]
 script = ExtResource("1_2rw1r")
@@ -82,13 +81,5 @@ size_flags_horizontal = 4
 [node name="TryAgain" type="Button" parent="Control/MarginContainer/RestartLayout/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "Try again"
-
-[node name="HealthBar" parent="Control" instance=ExtResource("2_b56nr")]
-layout_mode = 0
-offset_left = 33.0
-offset_top = 25.0
-offset_right = 349.0
-offset_bottom = 49.0
-value = 135.0
 
 [connection signal="pressed" from="Control/MarginContainer/RestartLayout/MarginContainer/HBoxContainer/TryAgain" to="." method="_on_try_again_pressed"]

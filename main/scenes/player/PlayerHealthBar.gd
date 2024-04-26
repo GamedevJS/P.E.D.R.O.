@@ -1,20 +1,20 @@
+class_name PlayerHealthBar
 extends ProgressBar
 
 
 @onready var timer := $Timer as Timer
 @onready var damage_bar := $DamageBar as ProgressBar
 
+var player : Player
 var health_component : HealthComponent
 
 var HEALTH : float = 0.0
 
-func _ready():
-	var palyer_char : Player = get_parent().get_parent().get_parent().get_node("player")
-	print(palyer_char)
-	health_component = palyer_char.get_node("HealthComponent")
+
+func setup():
+	health_component = player.get_node("HealthComponent")
 	HEALTH = health_component.HEALTH
 	
-	print(health_component)
 	print(health_component.HEALTH)
 	print(HEALTH)
 	print(value)
@@ -25,8 +25,14 @@ func _ready():
 	damage_bar.value = HEALTH
 	damage_bar.max_value = HEALTH
 	
+	print(health_component.HEALTH)
+	print(HEALTH)
+	print(value)
+	print(max_value)
+	
 	if !health_component.damage_recieved.is_connected(_on_health_component_damage_recieved):
 		health_component.damage_recieved.connect(_on_health_component_damage_recieved)
+	
 	
 	
 func _on_timer_timeout():

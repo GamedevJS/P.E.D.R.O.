@@ -10,7 +10,8 @@ extends Node2D
 @export var player : Player
 @export var ui : UI
 
-@onready var player_resource = load("res://main/scenes/player/player.gd")
+@onready var player_health_resource = load("res://main/scenes/player/PlayerHealthBar.tscn")
+
 
 func _ready():
 	player_camera.make_current()
@@ -45,6 +46,14 @@ func reestart_game():
 	player.set_visible(true)
 	menu.set_visible(false)
 	ui.set_visible(true)
+	
+	var player_health : PlayerHealthBar = player_health_resource.instantiate()
+	player_health.player = player
+	ui.get_node("Control").add_child(player_health)
+	player_health.setup()
+	player_health.position = Vector2(40, 40)
+	player_health.size = Vector2(300,25)
+
 
 
 func _on_menu_start_game():
