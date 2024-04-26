@@ -29,6 +29,6 @@ func handle_player_death(status: Player.PlayerStatus):
 
 
 func on_start():
-	player.initialize()
+	player.initilize()
 	spawner.enable()
 	
