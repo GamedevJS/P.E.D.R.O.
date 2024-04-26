@@ -20,9 +20,9 @@ var SEN_45 = pow(2, 1/2)/2
 @onready var attack_cooldown_timer := $AttackCooldown as Timer
 @onready var laser_cooldown_timer := $LaserCooldown as Timer
 @onready var attack := $Attack as PlayerAttackComponent
-@onready var camera := $Camera as Camera2D
 @onready var health := $HealthComponent as HealthComponent
 
+@export var camera : Camera2D
 
 @onready var laser_beam = load("res://main/scenes/projectiles/Laser.tscn")
 
@@ -35,7 +35,6 @@ func _physics_process(delta):
 		movment_handler(delta)
 		attack_handler()
 		move_and_slide()
-		print(position)
 	
 
 func _process(delta):
@@ -48,7 +47,6 @@ func movment_handler(delta):
 			Input.get_action_strength("down") - Input.get_action_strength("up")
 		)
 		velocity = DIR * SPEED * delta
-		
 		if INVINCILITY:
 			velocity -= KNOCKBACK
 

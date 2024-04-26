@@ -16,7 +16,6 @@ func movment_handler(delta):
 	if !ATTACKING and PLAYER != null:
 		DIR = (PLAYER.position - position).normalized()
 		velocity = (DIR * SPEED * delta)
-		print(PLAYER.position)
 	else:
 		velocity = Vector2.ZERO
 	if INVINCILITY:

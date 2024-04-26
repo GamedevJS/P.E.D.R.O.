@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://c2ppriesvmdgu"]
 
-[ext_resource type="Script" path="res://main/scripts/player.gd" id="1_qm2sx"]
+[ext_resource type="Script" path="res://main/scenes/player/player.gd" id="1_bppej"]
 [ext_resource type="Texture2D" uid="uid://dy6q2fwi5u5p0" path="res://assets/robo/animacoes.png" id="2_rrcwx"]
 [ext_resource type="PackedScene" uid="uid://bdre7ohepr58m" path="res://main/scenes/generic/HealthComponent.tscn" id="2_ufvpn"]
 [ext_resource type="PackedScene" uid="uid://07bodgbfi3i8" path="res://main/scenes/generic/HitboxComponent.tscn" id="9_61iej"]
@@ -672,7 +672,8 @@ radius = 5.0
 z_index = 1
 y_sort_enabled = true
 collision_mask = 38
-script = ExtResource("1_qm2sx")
+script = ExtResource("1_bppej")
+IS_ALIVE = false
 
 [node name="Player" type="AnimationPlayer" parent="."]
 libraries = {
@@ -690,6 +691,7 @@ vframes = 4
 wait_time = 0.5
 
 [node name="Hitbox" parent="." node_paths=PackedStringArray("HEALT_COMPONENT") instance=ExtResource("9_61iej")]
+visible = false
 collision_mask = 8
 HEALT_COMPONENT = NodePath("../HealthComponent")
 
@@ -715,11 +717,13 @@ wait_time = 0.8
 wait_time = 3.0
 
 [node name="body" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(1, 16)
 rotation = 3.14159
 shape = SubResource("CapsuleShape2D_ggkec")
 
 [node name="Attack" parent="." instance=ExtResource("11_f5auv")]
+visible = false
 position = Vector2(0, 0)
 rotation = 2.0944
 KNOCK_BACK_FORCE = 120.0

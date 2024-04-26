@@ -46,23 +46,49 @@ autowrap_mode = 0
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
+alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/DeathLayout"]
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/DeathLayout"]
+layout_mode = 2
+theme_override_constants/margin_top = 256
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/DeathLayout/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+alignment = 1
 
-[node name="DeathText" type="RichTextLabel" parent="Control/MarginContainer/DeathLayout/HBoxContainer"]
+[node name="DeathText" type="RichTextLabel" parent="Control/MarginContainer/DeathLayout/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
+size_flags_vertical = 4
 bbcode_enabled = true
 fit_content = true
 autowrap_mode = 0
 
-[node name="HealthBar" parent="Control" instance=ExtResource("2_b56nr")]
+[node name="RestartLayout" type="VBoxContainer" parent="Control/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 436.0
-offset_bottom = 31.0
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/RestartLayout"]
+layout_mode = 2
+theme_override_constants/margin_top = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/RestartLayout/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TryAgain" type="Button" parent="Control/MarginContainer/RestartLayout/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Try again"
+
+[node name="HealthBar" parent="Control" instance=ExtResource("2_b56nr")]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 25.0
+offset_right = 349.0
+offset_bottom = 49.0
+value = 135.0
+
+[connection signal="pressed" from="Control/MarginContainer/RestartLayout/MarginContainer/HBoxContainer/TryAgain" to="." method="_on_try_again_pressed"]

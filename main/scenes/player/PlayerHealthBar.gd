@@ -13,7 +13,12 @@ func _ready():
 	health_component = palyer_char.get_node("HealthComponent")
 	HEALTH = health_component.HEALTH
 	
-	print("Aqui")
+	print(health_component)
+	print(health_component.HEALTH)
+	print(HEALTH)
+	print(value)
+	print(max_value)
+	
 	value = HEALTH
 	max_value = HEALTH
 	damage_bar.value = HEALTH
@@ -31,6 +36,9 @@ func _on_health_component_damage_recieved():
 	var prev_health = HEALTH
 	HEALTH = health_component.HEALTH
 	value = HEALTH
+	
+	#print(HEALTH)
+	#print(value)
 	
 	if HEALTH <= 0:
 		queue_free()

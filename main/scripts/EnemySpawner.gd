@@ -46,7 +46,10 @@ func get_spawn_position():
 func enable():
 	ENABLED = true
 	time = 0
+	for n in get_parent().get_children():
+		if n is BaseEnemy:
+			remove_child(n)
+			n.queue_free()
 
-	
 func disable():
 	ENABLED = false

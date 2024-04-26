@@ -3,12 +3,17 @@ extends Node2D
 
 
 @onready var spawner : EnemySpawner = get_node("Map/EnemySpawner")
-	
+@onready var camera := $Camera as Camera2D
+@onready var player_camera := %PlayerCamera as Camera2D
+@onready var menu := %Menu as Menu
+
 @export var player : Player
 @export var ui : UI
 
+@onready var player_resource = load("res://main/scenes/player/player.gd")
 
 func _ready():
+	player_camera.make_current()
 	if !player.item_collected.is_connected(ui._on_collect):
 		player.item_collected.connect(ui._on_collect)
 
@@ -17,18 +22,30 @@ func _ready():
 
 	if !player.player_died.is_connected(handle_player_death):
 		player.player_died.connect(handle_player_death)
-
-	spawner.enable()
+		
+	if !ui.retry.is_connected(reestart_game):
+		ui.retry.connect(reestart_game)
 	
+	spawner.disable()
+	camera.make_current()
+	player.set_visible(false)
+	ui.set_visible(false)
+
 
 func handle_player_death(status: Player.PlayerStatus):
-	var camera : Camera2D = $Camera
 	camera.position = status.position
 	camera.make_current()
 	spawner.disable()
 
 
-func on_start():
-	player.initilize()
+func reestart_game():
 	spawner.enable()
-	
+	player_camera.make_current()
+	player.initialize()
+	player.set_visible(true)
+	menu.set_visible(false)
+	ui.set_visible(true)
+
+
+func _on_menu_start_game():
+	reestart_game()
