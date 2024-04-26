@@ -25,3 +25,7 @@ func handle_heal(heal: float):
 	damage_recieved.emit()
 	if HEALTH >= MAX_HEALTH:
 		HEALTH = MAX_HEALTH
+
+
+func full_heal():
+	HEALTH = MAX_HEALTH

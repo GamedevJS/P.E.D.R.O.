@@ -18,11 +18,17 @@ func _ready():
 	if !player.player_died.is_connected(handle_player_death):
 		player.player_died.connect(handle_player_death)
 
+	spawner.enable()
+	
 
 func handle_player_death(status: Player.PlayerStatus):
 	var camera : Camera2D = $Camera
 	camera.position = status.position
 	camera.make_current()
 	spawner.disable()
-	
+
+
+func on_start():
+	player.initialize()
+	spawner.enable()
 	
