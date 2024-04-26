@@ -171,7 +171,6 @@ terrain_set_0/terrain_0/color = Color(0.635294, 0.235294, 0.156863, 1)
 sources/0 = SubResource("TileSetAtlasSource_pfh2d")
 
 [node name="TileMap" type="TileMap"]
-position = Vector2(492, 166)
 tile_set = SubResource("TileSet_sdc3g")
 format = 2
 layer_0/name = "Layer0"
