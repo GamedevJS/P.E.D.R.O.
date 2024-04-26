@@ -31,9 +31,11 @@ func _ready():
 	SPEED = BASE_SPEED
 	
 func _physics_process(delta):
-	movment_handler(delta)
-	attack_handler()
-	move_and_slide()
+	if IS_ALIVE:
+		movment_handler(delta)
+		attack_handler()
+		move_and_slide()
+		print(position)
 	
 
 func _process(delta):
@@ -136,7 +138,6 @@ func  on_death():
 	player_died.emit(status)
 	IS_ALIVE = false
 	animation.play("death")
-	$Hitbox.monitorable = false
 	
 # Signals
 
@@ -173,3 +174,9 @@ func _on_laser_cooldown_timeout():
 
 func _on_health_timeout_timeout():
 	health.handle_damage(1)
+
+
+func initialize():
+	position = Vector2.ZERO
+	IS_ALIVE = true
+	health.full_heal()

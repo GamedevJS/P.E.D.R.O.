@@ -42,6 +42,11 @@ func get_spawn_position():
 		return Vector2(PLAYER.global_position.x + vpr.x/4, PLAYER.global_position.y + vpr.y/4)
 	return Vector2.ZERO
 	
+
+func enable():
+	ENABLED = true
+	time = 0
+
 	
 func disable():
 	ENABLED = false

@@ -45,6 +45,7 @@ func attack():
 		sprites.scale.x = 1
 		spit.position = position + Vector2(-15,0)
 	spit.ATTACK_DIR = target_pos
+	spit.ROT = Vector2(-target_pos.x, -target_pos.y).angle()
 	SPIT_HOLDER = spit
 
 

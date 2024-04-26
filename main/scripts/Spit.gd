@@ -5,9 +5,16 @@ extends CharacterBody2D
 
 var HIT : bool = false
 var ATTACK_DIR : Vector2 = Vector2.ZERO
+var ROT : float = 0
 
 @onready var animation := $AnimationPlayer as AnimationPlayer
 @onready var area := $RangedAttackComponent as RangedAttackComponent
+@onready var sprites := $Sprite2D as Sprite2D
+
+func _ready():
+	animation.play("shoot")
+	sprites.rotation = ROT
+	
 
 func _physics_process(delta):
 	if !HIT:

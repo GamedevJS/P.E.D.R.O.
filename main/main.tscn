@@ -11,6 +11,7 @@ player = NodePath("player")
 ui = NodePath("UI")
 
 [node name="Map" parent="." instance=ExtResource("1_x6lmk")]
+position = Vector2(-120, 100)
 
 [node name="player" parent="." instance=ExtResource("2_d5v22")]
 scale = Vector2(1.4, 1.4)
