@@ -10,6 +10,7 @@ var HEALTH : float = 0.0
 
 func _ready():
 	var palyer_char : Player = get_parent().get_parent().get_parent().get_node("player")
+	print(palyer_char)
 	health_component = palyer_char.get_node("HealthComponent")
 	HEALTH = health_component.HEALTH
 	
@@ -19,8 +20,8 @@ func _ready():
 	print(value)
 	print(max_value)
 	
-	value = HEALTH
-	max_value = HEALTH
+	set_value(HEALTH)
+	set_max(HEALTH)
 	damage_bar.value = HEALTH
 	damage_bar.max_value = HEALTH
 	
@@ -35,10 +36,10 @@ func _on_timer_timeout():
 func _on_health_component_damage_recieved():
 	var prev_health = HEALTH
 	HEALTH = health_component.HEALTH
-	value = HEALTH
+	set_value(HEALTH)
 	
-	#print(HEALTH)
-	#print(value)
+	print("HEALTH " + str(HEALTH))
+	print("value " + str(value))
 	
 	if HEALTH <= 0:
 		queue_free()

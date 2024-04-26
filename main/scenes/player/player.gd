@@ -20,9 +20,9 @@ var SEN_45 = pow(2, 1/2)/2
 @onready var attack_cooldown_timer := $AttackCooldown as Timer
 @onready var laser_cooldown_timer := $LaserCooldown as Timer
 @onready var attack := $Attack as PlayerAttackComponent
-@onready var health := $HealthComponent as HealthComponent
 
 @export var camera : Camera2D
+@export var health : HealthComponent
 
 @onready var laser_beam = load("res://main/scenes/projectiles/Laser.tscn")
 

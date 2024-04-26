@@ -668,11 +668,12 @@ radius = 5.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ggkec"]
 radius = 5.0
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" node_paths=PackedStringArray("health")]
 z_index = 1
 y_sort_enabled = true
 collision_mask = 38
 script = ExtResource("1_bppej")
+health = NodePath("HealthComponent")
 IS_ALIVE = false
 
 [node name="Player" type="AnimationPlayer" parent="."]
