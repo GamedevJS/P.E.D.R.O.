@@ -16,7 +16,7 @@ func _ready():
 	
 	tutorial_label.clear()
 	tutorial_label.push_font(font, 10)
-	tutorial_label.append_text("Movment: W/A/S/D")
+	tutorial_label.append_text("Movement: W/A/S/D")
 	tutorial_label.newline()
 	tutorial_label.append_text("Attack: M1")
 	tutorial_label.newline()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvuagmpwqn068"
-path="res://.godot/imported/pedro_power.180x180.png-2bdc773b6c7f76018e219c78c947037a.ctex"
+uid="uid://khddx3r7nkv0"
+path="res://.godot/imported/pedro_power.180x180.png-4fa90225df5b8501d19c5c1288658c63.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pedro_power.180x180.png"
-dest_files=["res://.godot/imported/pedro_power.180x180.png-2bdc773b6c7f76018e219c78c947037a.ctex"]
+source_file="res://export/pedro_power.180x180.png"
+dest_files=["res://.godot/imported/pedro_power.180x180.png-4fa90225df5b8501d19c5c1288658c63.ctex"]
 
 [params]
 
