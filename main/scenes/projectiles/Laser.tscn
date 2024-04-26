@@ -74,6 +74,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AreaAttackComponent/Area:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.1, 0.1)]
+}
 
 [sub_resource type="Animation" id="Animation_wl5vs"]
 resource_name = "explode"
@@ -137,6 +149,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(2.5, 2.5)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AreaAttackComponent/Area:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(0.4, 0.4), Vector2(0.6, 0.6), Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_y0y75"]
@@ -225,6 +249,7 @@ vframes = 4
 [node name="tracer" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CircleShape2D_i6gdm")
+disabled = true
 
 [node name="Detonator" type="Timer" parent="."]
 wait_time = 1.2
@@ -239,13 +264,13 @@ DAMAGE = 60.0
 KNOCK_BACK_FORCE = 100.0
 
 [node name="Area" type="CollisionShape2D" parent="AreaAttackComponent"]
+scale = Vector2(0.1, 0.1)
 shape = SubResource("CircleShape2D_5hqpi")
-disabled = true
 
 [node name="Collision" type="Area2D" parent="."]
 visible = false
 collision_layer = 0
-collision_mask = 6
+collision_mask = 32
 
 [node name="Body" type="CollisionShape2D" parent="Collision"]
 shape = SubResource("CircleShape2D_idfhb")
@@ -258,5 +283,5 @@ libraries = {
 
 [connection signal="timeout" from="Detonator" to="." method="_on_detonator_timeout"]
 [connection signal="area_entered" from="AreaAttackComponent" to="AreaAttackComponent" method="_on_area_entered"]
-[connection signal="body_entered" from="Collision" to="." method="_on_collision_body_entered"]
+[connection signal="area_entered" from="Collision" to="." method="_on_collision_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
