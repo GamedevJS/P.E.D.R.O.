@@ -29,3 +29,4 @@ func handle_heal(heal: float):
 
 func full_heal():
 	HEALTH = MAX_HEALTH
+	DEAD = false

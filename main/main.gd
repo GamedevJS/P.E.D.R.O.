@@ -47,6 +47,9 @@ func reestart_game():
 	menu.set_visible(false)
 	ui.set_visible(true)
 	
+	if ui.get_node("Control").get_node("PlayerHealthBar"):
+		ui.get_node("Control").get_node("PlayerHealthBar").queue_free()
+	
 	var player_health : PlayerHealthBar = player_health_resource.instantiate()
 	player_health.player = player
 	ui.get_node("Control").add_child(player_health)

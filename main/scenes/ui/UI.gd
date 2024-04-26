@@ -45,14 +45,16 @@ func handle_player_death_ui(status: Player.PlayerStatus):
 	restart_layout.set_visible(true)
 
 	score_label.clear()
+	
+	death_label.clear()
+	death_label.newline()
 	death_label.push_font(font, 30)
 	death_label.append_text("YOU WERE DESTROYED")
 	death_label.newline()
+	death_label.newline()
 	death_label.push_font(font, 15)
 	death_label.append_text("Your score was: " + str(score))
-	death_label.newline()
-	death_label.newline()
-
+	
 
 func _on_try_again_pressed():
 	retry.emit()

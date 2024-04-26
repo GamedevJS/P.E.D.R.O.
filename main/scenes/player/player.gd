@@ -130,7 +130,7 @@ func get_attack_direction():
 	return 0
 
 
-func  on_death():
+func on_death():
 	var status : PlayerStatus = PlayerStatus.new()
 	status.position = position
 	player_died.emit(status)

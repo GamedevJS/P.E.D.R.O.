@@ -725,7 +725,7 @@ shape = SubResource("CapsuleShape2D_ggkec")
 
 [node name="Attack" parent="." instance=ExtResource("11_f5auv")]
 visible = false
-position = Vector2(0, 0)
+position = Vector2(-16, -30)
 rotation = 2.0944
 KNOCK_BACK_FORCE = 120.0
 DURATION = 0.5
