@@ -29,7 +29,7 @@ func _ready():
 	
 	spawner.disable()
 	camera.make_current()
-	player.set_visible(false)
+	#player.set_visible(false)
 	ui.set_visible(false)
 
 
